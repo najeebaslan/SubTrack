@@ -1,4 +1,4 @@
-package com.najeeb.movies.navigation
+package com.najeeb.movies.screens.home
 
 import android.accounts.Account
 import androidx.compose.animation.AnimatedContent
@@ -11,19 +11,10 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import com.najeeb.movies.InboxScreen
-import com.najeeb.movies.SentScreen
-import com.najeeb.movies.TrashScreen
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.CardDefaults
@@ -32,8 +23,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.selected
@@ -42,19 +35,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.najeeb.movies.R
 
-
-@Composable
-fun NavHostCompose(navController: NavHostController, innerPadding: PaddingValues) {
-  NavHost(
-    navController = navController,
-    startDestination = "inbox",
-    modifier = Modifier.padding(innerPadding)
-  ) {
-    composable("inbox") { InboxScreen() }
-    composable("sent") { SentScreen() }
-    composable("trash") { TrashScreen() }
-  }
-}
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -73,7 +53,8 @@ fun EmailCard(
       .combinedClickable(
         onClick = { onClick(email.id) },
         onLongClick = { onLongClick(email.id) }
-      ) .border(
+      )
+      .border(
         1.dp,
         MaterialTheme.colorScheme.surface.copy(alpha = 0.1f),
         MaterialTheme.shapes.medium
@@ -175,7 +156,7 @@ fun SelectedProfileImage(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ReplyProfileImage(avatarUrl: Int,modifier: Modifier = Modifier) {
+fun ReplyProfileImage(avatarUrl: Int, modifier: Modifier = Modifier) {
   Image(
     modifier = modifier
       .size(40.dp)

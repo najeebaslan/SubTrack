@@ -60,7 +60,8 @@ val replyTypography = Typography(
     letterSpacing = 0.25.sp,
   ),
   bodySmall = TextStyle(
-    fontWeight = FontWeight.Bold,
+    color = GrayColor,
+    fontWeight = FontWeight.Normal,
     fontSize = 12.sp,
     lineHeight = 16.sp,
     letterSpacing = 0.4.sp,

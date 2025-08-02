@@ -52,9 +52,11 @@ dependencies {
   implementation("com.google.accompanist:accompanist-adaptive:0.26.2-beta")
   implementation(libs.androidx.adaptive.android)
   implementation(libs.androidx.navigation.common.android)
-  implementation("androidx.navigation:navigation-compose:2.7.3") // أو أحدث إصدار
+  implementation("androidx.navigation:navigation-compose:2.7.3")
   implementation("androidx.activity:activity-compose:1.7.2")
   implementation("androidx.core:core-splashscreen:1.0.0")
+  // For manage StatueBar
+  implementation("com.google.accompanist:accompanist-systemuicontroller:0.33.2-alpha")
   implementation(libs.androidx.appcompat)
   implementation(libs.material)
   implementation(libs.androidx.activity)

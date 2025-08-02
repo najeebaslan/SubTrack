@@ -16,7 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
 import com.najeeb.movies.R
-import com.najeeb.movies.navigation.Screen
+import com.najeeb.movies.screens.navigation.Screen
 
 @Composable
 fun IsHaveAccount(

@@ -93,7 +93,8 @@ fun MoviesTheme(
   if (!view.isInEditMode) {
     SideEffect {
       val window = (view.context as Activity).window
-      window.statusBarColor = myColorScheme.surface.toArgb()
+      window.statusBarColor = myColorScheme.background.toArgb()
+      window.navigationBarColor=myColorScheme.background.toArgb();
       WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !isDarkTheme
     }
   }

@@ -25,7 +25,10 @@ val NewOnErrorContainer = Color(0xFF410001)
 
 val NewBackground = Color(0xFFFBFDFD)
 val NewOnBackground = Color(0xFF191C1D)
-val NewSurface = Color(0xFFFFFFFF)
+val NewSurface = "#f6f6f6".toColor()
+var GrayColor =  "#666666".toColor()
+
+//  Color(0xFFFFFFFF)
 val NewOnSurface = Color(0xFF191C1D)
 val NewSurfaceVariant = Color(0xFFE0E3E3) // For dividers, light backgrounds
 val NewOnSurfaceVariant = Color(0xFF45464F) // For secondary text on surfaces

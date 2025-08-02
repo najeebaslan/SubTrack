@@ -29,7 +29,7 @@ fun GradientButton(
     modifier = modifier
       .fillMaxWidth()
       .height(70.dp)
-      .padding(horizontal = 16.dp, vertical = 8.dp)
+      .padding(horizontal = 20.dp, vertical = 8.dp)
       .shadow(
         shape = RoundedCornerShape(50.dp),
         clip = false,
