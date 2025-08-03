@@ -1,17 +1,80 @@
 package com.najeeb.movies.screens.wallet
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.najeeb.movies.components.CustomAppTopBar
+import com.najeeb.movies.components.HeaderBackground
+import com.najeeb.movies.screens.home.NotificationIcon
+import com.najeeb.movies.screens.wallet.components.WalletBodyContent
 
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview(showBackground = true)
 @Composable
 fun WalletScreen() {
-  Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-    Text("Trash", style = MaterialTheme.typography.headlineSmall)
+  val systemUiController = rememberSystemUiController()
+  SideEffect {
+    systemUiController.setStatusBarColor(
+      color = Color.Transparent,
+      darkIcons = false
+    )
+  }
+
+  Scaffold(
+    topBar = {
+      CustomAppTopBar(
+        title = "Wallet",
+        containerColor = Color.Transparent,
+        titleColor = Color.White,
+        navigationIconColor = Color.White,
+        actions = {
+          Box(modifier = Modifier.padding(horizontal = 16.dp)) {
+            NotificationIcon(onClick = {})
+          }
+        }
+      )
+    }
+  ) { padding ->
+    Column(
+      modifier = Modifier
+        .fillMaxSize()
+        .padding(),
+      horizontalAlignment = Alignment.Start,
+      verticalArrangement = Arrangement.Top
+    ) {
+      Box {
+        HeaderBackground(modifier = Modifier.height(170.dp))
+
+        Surface(
+          color = MaterialTheme.colorScheme.background,
+          modifier = Modifier
+            .fillMaxSize()
+            .offset(y = 100.dp),
+          shape = RoundedCornerShape(30.dp)
+        ) {
+          WalletBodyContent(
+            onClickPay = { println("Pay button clicked") }
+          )
+        }
+      }
+    }
   }
 }

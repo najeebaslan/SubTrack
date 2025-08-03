@@ -43,7 +43,8 @@ fun DateFilterChips(
       .padding(8.dp)
       .fillMaxWidth()
       .horizontalScroll(rememberScrollState()),
-    horizontalArrangement = Arrangement.spacedBy(10.dp)
+    horizontalArrangement = Arrangement.SpaceBetween,
+    verticalAlignment = Alignment.CenterVertically
   ) {
     dates.forEach { date ->
       Box(

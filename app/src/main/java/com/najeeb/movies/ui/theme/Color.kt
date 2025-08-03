@@ -30,8 +30,6 @@ val NewBackground = Color(0xFFFBFDFD)
 val NewOnBackground = Color(0xFF191C1D)
 val NewSurface = "#f6f6f6".toColor()
 var GrayColor = "#666666".toColor()
-
-//  Color(0xFFFFFFFF)
 val NewOnSurface = Color(0xFF191C1D)
 val NewSurfaceVariant = Color(0xFFE0E3E3) // For dividers, light backgrounds
 val NewOnSurfaceVariant = Color(0xFF45464F) // For secondary text on surfaces
@@ -45,6 +43,8 @@ val NewPositive = Color(0xFF00C853) // Green for income
 
 val BackgroundCardColor: Color
   @Composable get() = if (isSystemInDarkTheme()) Color.Gray.copy(alpha = 0.1f) else "#F0F6F5".toColor()
+val BlackAndWhite: Color
+  @Composable get() = if (isSystemInDarkTheme()) Color.White else Color.Black
 
 val IconColor: Color
   @Composable get() = if (isSystemInDarkTheme()) Color.White else Color(0xFF2D3132)

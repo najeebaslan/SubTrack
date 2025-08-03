@@ -9,6 +9,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
@@ -22,11 +23,13 @@ fun CustomAppTopBar(
   onBackClick: () -> Unit = {},
   showBackButton: Boolean = true,
   actions: @Composable () -> Unit = {},
+  scrollBehavior: TopAppBarScrollBehavior? = null,
   containerColor: Color = MaterialTheme.colorScheme.background,
   titleColor: Color = IconColor,
   navigationIconColor: Color = IconColor,
 ) {
   CenterAlignedTopAppBar(
+    scrollBehavior =scrollBehavior ,
     title = {
       Text(
         text = title,

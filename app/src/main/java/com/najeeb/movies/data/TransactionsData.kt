@@ -5,8 +5,7 @@ import com.najeeb.movies.R
 import com.najeeb.movies.screens.home.TransactionItem
 import com.najeeb.movies.ui.theme.toColor
 
-
- val defaultTransactions = listOf(
+ val TransactionsData = listOf(
   TransactionItem(
     imageUri = R.drawable.upwk,
     paddingImage = 1.dp,
@@ -25,7 +24,7 @@ import com.najeeb.movies.ui.theme.toColor
   ),
   TransactionItem(
     imageUri = R.drawable.paypal,
-    paddingImage = 1.dp,
+    paddingImage = 10.dp,
     name = "Paypal",
     date = "Jan 30, 2022",
     amount = "+ \$ 1,406.00",

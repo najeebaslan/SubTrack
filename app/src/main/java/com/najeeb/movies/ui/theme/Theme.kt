@@ -101,7 +101,7 @@ fun MoviesTheme(
 
   MaterialTheme(
     colorScheme = myColorScheme,
-    typography = replyTypography, // Assuming you have a typography file
+    typography = replyTypography(BlackAndWhite), // Assuming you have a typography file
     content = content,
   )
 }

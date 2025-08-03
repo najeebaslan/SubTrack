@@ -69,7 +69,7 @@ fun NavHostCompose(navController: NavHostController, innerPadding: PaddingValues
     composable("statistic") { StatisticScreen() }
     composable("wallet") { WalletScreen() }
     composable("addExpense") { AddExpenseScreen(navController) }
-    composable("profile") { ProfileScreen(navController) }
+    composable("profile") { ProfileScreen() }
 
   }
 }

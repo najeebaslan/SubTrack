@@ -86,7 +86,6 @@ fun InvoiceUploadButton() {
 
     Spacer(modifier = Modifier.height(16.dp))
 
-    // Show selected image
     imageUri?.let { uri ->
       Image(
         painter = rememberAsyncImagePainter(uri),

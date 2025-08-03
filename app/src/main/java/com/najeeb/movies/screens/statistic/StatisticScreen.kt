@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.najeeb.movies.R
 import com.najeeb.movies.components.CustomAppTopBar
+import com.najeeb.movies.components.ToggleButton
 import com.najeeb.movies.core.HelperSize.defaultPadding
 import com.najeeb.movies.screens.home.HomeListItems
 import com.najeeb.movies.screens.home.TransactionItem
@@ -69,7 +70,6 @@ fun StatisticScreen() {
       CustomAppTopBar(
         title = "Statistic Screen",
         showBackButton = false,
-        onBackClick = { /* Handle back click */ },
         actions = {
           Image(
             painter = painterResource(R.drawable.download_icon),
@@ -101,17 +101,17 @@ fun StatisticScreen() {
       StatisticsFlitterRow()
       Spacer(modifier = Modifier.height(20.dp))
 
-      Box(modifier = Modifier.height(200.dp).fillMaxWidth()) {
+      Box(modifier = Modifier
+        .height(200.dp)
+        .fillMaxWidth()) {
         LineChart(
-
-
           modifier = Modifier
             .fillMaxSize(),
           data = remember {
             listOf(
               Line(
                 label = "Windows",
-                values = listOf(10.0, 15.0, 10.0, 19.0, 15.0,20.0,15.0, 25.0),
+                values = listOf(10.0, 15.0, 10.0, 19.0, 15.0, 20.0, 15.0, 25.0),
                 color = SolidColor(Color(0xFF23af92)),
                 firstGradientFillColor = Color(0xFF2BC0A1).copy(alpha = .5f),
                 secondGradientFillColor = Color.Transparent,
@@ -126,6 +126,7 @@ fun StatisticScreen() {
           }),
         )
       }
+
       Spacer(modifier = Modifier.height(20.dp))
 
       defaultTransactions.forEach { transaction ->

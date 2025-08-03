@@ -21,7 +21,7 @@ fun CustomTextField(
   modifier: Modifier = Modifier,
   hint: String = "Enter amount",
   hintStyle:TextStyle=MaterialTheme.typography.bodyMedium,
-  backgroundColor: Color = Color.White,
+  backgroundColor: Color = MaterialTheme.colorScheme.background,
   borderColor: Color = MaterialTheme.colorScheme.outline,
   enabled: Boolean = true
 ) {

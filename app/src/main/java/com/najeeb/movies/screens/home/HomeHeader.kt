@@ -13,7 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -22,16 +21,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.najeeb.movies.R
 import com.najeeb.movies.components.HeaderBackground
-import com.najeeb.movies.core.HelperSize.defaultPadding
 import com.najeeb.movies.core.HelperSize.paddingBalanceCard
 import com.najeeb.movies.ui.theme.BackgroundCardColor
+import com.najeeb.movies.ui.theme.toColor
 
 @Composable
 fun HomeHeader(
-  username: String,
   balanceInfo: BalanceInfo,
   modifier: Modifier = Modifier,
-  onNotificationClick: () -> Unit = {},
   onMenuClick: () -> Unit = {}
 ) {
   Box(
@@ -41,7 +38,6 @@ fun HomeHeader(
 
     HeaderBackground(modifier)
 
-//    HeaderContent(username, onNotificationClick)
 
     BalanceCard(
       balanceInfo = balanceInfo,
@@ -56,23 +52,7 @@ fun HomeHeader(
 
 
 @Composable
- fun HeaderContent(username: String, onNotificationClick: () -> Unit) {
-  Row(
-    modifier = Modifier
-      .fillMaxWidth()
-      .padding(horizontal = 16.dp)
-      .systemBarsPadding()
-      .padding(top = defaultPadding.dp),
-    verticalAlignment = Alignment.CenterVertically,
-    horizontalArrangement = Arrangement.SpaceBetween
-  ) {
-    UserGreeting(username)
-    NotificationIcon(onNotificationClick)
-  }
-}
-
-@Composable
- fun UserGreeting(username: String) {
+fun UserGreeting(username: String) {
   Column {
     Text(
       text = stringResource(id = R.string.good_afternoon),
@@ -87,7 +67,7 @@ fun HomeHeader(
 }
 
 @Composable
- fun NotificationIcon(onClick: () -> Unit) {
+fun NotificationIcon(onClick: () -> Unit) {
   Image(
     modifier = Modifier
       .clip(RoundedCornerShape(10.dp))
@@ -135,8 +115,6 @@ fun BalanceRow(
         )
       )
     }
-//    painter = painterResource(R.drawable.more_hor_icon),
-
     Icon(
       Icons.Filled.MoreVert,
       contentDescription = "Menu",
@@ -150,14 +128,14 @@ fun BalanceRow(
 @Composable
 fun HomeListItems(
   modifier: Modifier = Modifier,
-  imageUri:Int,
+  imageUri: Int,
   paddingImage: Dp,
   name: String,
   date: String,
-  amount: String,
-  amountColor:Color,
-
-  ) {
+  amount: String? = null,
+  amountColor: Color,
+  amountCompose: (@Composable () -> Unit)? = null,
+) {
   Row(
     modifier = modifier
       .fillMaxWidth(),
@@ -188,13 +166,18 @@ fun HomeListItems(
         Text(date, style = MaterialTheme.typography.bodySmall)
       }
     }
-    Text(
-      text = amount,
-      style = MaterialTheme.typography.titleMedium.copy(
-        color =amountColor,
-        fontSize = 17.sp,
+    if (amountCompose != null) {
+      amountCompose()
+    } else {
+
+      Text(
+        text = amount ?: "",
+        style = MaterialTheme.typography.titleMedium.copy(
+          color = amountColor,
+          fontSize = 17.sp,
+        )
       )
-    )
+    }
   }
 
 }
