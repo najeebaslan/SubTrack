@@ -1,4 +1,7 @@
 package com.najeeb.movies.ui.theme
+
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 
@@ -26,7 +29,7 @@ val NewOnErrorContainer = Color(0xFF410001)
 val NewBackground = Color(0xFFFBFDFD)
 val NewOnBackground = Color(0xFF191C1D)
 val NewSurface = "#f6f6f6".toColor()
-var GrayColor =  "#666666".toColor()
+var GrayColor = "#666666".toColor()
 
 //  Color(0xFFFFFFFF)
 val NewOnSurface = Color(0xFF191C1D)
@@ -39,6 +42,12 @@ val NewInverseOnSurface = Color(0xFFFBFDFD)
 val NewInversePrimary = Color(0xFFB8C3FF) // Inverse of primary
 
 val NewPositive = Color(0xFF00C853) // Green for income
+
+val BackgroundCardColor: Color
+  @Composable get() = if (isSystemInDarkTheme()) Color.Gray.copy(alpha = 0.1f) else "#F0F6F5".toColor()
+
+val IconColor: Color
+  @Composable get() = if (isSystemInDarkTheme()) Color.White else Color(0xFF2D3132)
 
 fun String.toColor(): Color {
   return Color(android.graphics.Color.parseColor(this))

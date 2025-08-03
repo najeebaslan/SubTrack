@@ -1,6 +1,7 @@
 package com.najeeb.movies.screens.home
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -33,14 +35,10 @@ fun BalanceCard(
   modifier: Modifier = Modifier,
   onMenuClick: () -> Unit = {}
 ) {
-
-
   Card(
-
     elevation = CardDefaults.cardElevation(
       defaultElevation = 20.dp,
-
-      ),
+    ),
     shape = RoundedCornerShape(20.dp),
     modifier = modifier
       .padding(horizontal = 16.dp)
@@ -50,23 +48,21 @@ fun BalanceCard(
           color =
             MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.6f),
           offsetY = 0.dp,
-          offsetX = 15.dp,
-          blurRadius = 20.dp,
-        ),
+          offsetX = if (isSystemInDarkTheme()) 0.dp else 15.dp,
+          blurRadius = if (isSystemInDarkTheme()) 12.dp else 20.dp,
+        )
       ),
     colors = CardDefaults.cardColors(
       containerColor = MaterialTheme.colorScheme.primary
     )
   ) {
     Column {
-      // Main balance row
       BalanceRow(
         title = "Total Balance",
         amount = balanceInfo.totalBalance,
         onMenuClick = onMenuClick
       )
 
-      // Income/Expense row
       Row(
         modifier = Modifier
           .padding(16.dp)

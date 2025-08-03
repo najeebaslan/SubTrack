@@ -7,6 +7,9 @@
     <string name="sign_up">Sign Up</string>
     <string name="good_afternoon">Good afternoon</string>
     <string name="transactions_history">Transactions history</string>
+    <string name="send_again">Send Again</string>
+    <string name="top_spending">Top Spending</string>
+    <string name="add_invoice">Add Invoice</string>
     <string name="see_all">See all</string>
     <string name="sign_in">Sign In</string>
     <string name="email">Email</string>

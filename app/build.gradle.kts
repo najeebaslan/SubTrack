@@ -57,6 +57,10 @@ dependencies {
   implementation("androidx.core:core-splashscreen:1.0.0")
   // For manage StatueBar
   implementation("com.google.accompanist:accompanist-systemuicontroller:0.33.2-alpha")
+  // For Pick Image
+  implementation("io.coil-kt:coil-compose:2.5.0")
+  implementation (libs.compose.charts)
+
   implementation(libs.androidx.appcompat)
   implementation(libs.material)
   implementation(libs.androidx.activity)

@@ -49,6 +49,7 @@ val replyTypography = Typography(
   ),
   bodyLarge = TextStyle(
     fontWeight = FontWeight.Normal,
+    color = GrayColor,
     fontSize = 16.sp,
     lineHeight = 24.sp,
     letterSpacing = 0.15.sp,
@@ -56,6 +57,7 @@ val replyTypography = Typography(
   bodyMedium = TextStyle(
     fontWeight = FontWeight.Medium,
     fontSize = 14.sp,
+    color = GrayColor,
     lineHeight = 20.sp,
     letterSpacing = 0.25.sp,
   ),

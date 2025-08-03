@@ -7,7 +7,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import com.najeeb.movies.screens.home.HomeScreen
 import com.najeeb.movies.screens.onboarding.OnboardingScreen
 import com.najeeb.movies.ui.theme.MoviesTheme
 
@@ -21,12 +20,6 @@ class MainActivity : ComponentActivity() {
 
     setContent {
       MoviesTheme {
-//        HomeScreen()
-//        OnboardingScreen(
-//          onGetStartedClick={},
-//          onLoginClick={}
-//
-//        )
         MoviesApp()
       }
     }
