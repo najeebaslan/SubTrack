@@ -1,8 +1,8 @@
 package com.najeeb.movies.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
@@ -20,36 +20,34 @@ fun CustomTextField(
   onValueChange: (String) -> Unit,
   modifier: Modifier = Modifier,
   hint: String = "Enter amount",
-  hintStyle:TextStyle=MaterialTheme.typography.bodyMedium,
+  hintStyle: TextStyle = MaterialTheme.typography.bodyMedium,
   backgroundColor: Color = MaterialTheme.colorScheme.background,
   borderColor: Color = MaterialTheme.colorScheme.outline,
-  enabled: Boolean = true
+  enabled: Boolean = true,
+  enableClearButton: Boolean = false,
 ) {
   Box(modifier = modifier) {
-    TextField(
+    OutlinedTextField(
       value = value,
       onValueChange = onValueChange,
       modifier = Modifier
         .fillMaxWidth()
-        .background(backgroundColor)
-        .border(
-          width = 1.dp,
-          color = if (enabled) borderColor else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f),
-          shape = MaterialTheme.shapes.small
-        ),
+        .background(backgroundColor),
+
       singleLine = true,
+      shape = RoundedCornerShape(8.dp),
       keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
       colors = TextFieldDefaults.colors(
         focusedContainerColor = backgroundColor,
         unfocusedContainerColor = backgroundColor,
         disabledContainerColor = backgroundColor,
-        focusedIndicatorColor = Color.Transparent,
-        unfocusedIndicatorColor = Color.Transparent,
+        focusedIndicatorColor = MaterialTheme.colorScheme.primary,
+        unfocusedIndicatorColor = borderColor,
         disabledIndicatorColor = Color.Transparent
       ),
       placeholder = { Text(text = hint, style = hintStyle) },
       trailingIcon = {
-        if (value.isNotEmpty()) {
+        if (value.isNotEmpty()&&enableClearButton) {
           IconButton(
             onClick = { onValueChange("") }
           ) {

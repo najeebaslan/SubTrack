@@ -1,6 +1,7 @@
 package com.najeeb.movies.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
@@ -43,6 +44,13 @@ val NewPositive = Color(0xFF00C853) // Green for income
 
 val BackgroundCardColor: Color
   @Composable get() = if (isSystemInDarkTheme()) Color.Gray.copy(alpha = 0.1f) else "#F0F6F5".toColor()
+
+val ActiveTextToggleButtonColor: Color
+  @Composable get() = if (isSystemInDarkTheme()) MaterialTheme.typography.titleLarge.color else GrayColor
+
+
+
+
 val BlackAndWhite: Color
   @Composable get() = if (isSystemInDarkTheme()) Color.White else Color.Black
 

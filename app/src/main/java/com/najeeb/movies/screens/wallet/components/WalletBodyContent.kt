@@ -35,6 +35,7 @@ import com.najeeb.movies.components.ToggleButton
 import com.najeeb.movies.data.TransactionsData
 import com.najeeb.movies.data.UpcomingBillsData
 import com.najeeb.movies.screens.home.HomeListItems
+import com.najeeb.movies.ui.theme.ActiveTextToggleButtonColor
 import com.najeeb.movies.ui.theme.BackgroundCardColor
 import kotlinx.coroutines.launch
 
@@ -113,8 +114,8 @@ fun WalletBodyContent(
         toggleColor = MaterialTheme.colorScheme.background,
         toggleBackgroundColor = BackgroundCardColor,
         toggleBorderColor = Color.Transparent,
-        activeTextColor = MaterialTheme.typography.titleLarge.color,
-        inactiveTextColor = MaterialTheme.typography.titleLarge.color,
+        activeTextColor = ActiveTextToggleButtonColor,
+        inactiveTextColor = ActiveTextToggleButtonColor,
       )
     }
   }

@@ -133,6 +133,7 @@ private fun NameCard(
 private fun AmountTextField() {
   var amount by remember { mutableStateOf("") }
   CustomTextField(
+    enableClearButton = true,
     value = amount,
     onValueChange = { amount = it },
     hint = "\$ 48.00",

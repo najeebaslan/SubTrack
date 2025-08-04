@@ -33,7 +33,7 @@ fun CustomAppTopBar(
     title = {
       Text(
         text = title,
-        style = MaterialTheme.typography.titleMedium,
+        style = MaterialTheme.typography.titleLarge,
         textAlign = TextAlign.Center,
         color = titleColor
       )
