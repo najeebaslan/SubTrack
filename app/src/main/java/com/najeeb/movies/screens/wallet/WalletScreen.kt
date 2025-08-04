@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.najeeb.movies.components.CustomAppTopBar
 import com.najeeb.movies.components.HeaderBackground
@@ -27,7 +28,7 @@ import com.najeeb.movies.screens.wallet.components.WalletBodyContent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WalletScreen() {
+fun WalletScreen(navController: NavHostController,) {
   val systemUiController = rememberSystemUiController()
   SideEffect {
     systemUiController.setStatusBarColor(
@@ -69,7 +70,9 @@ fun WalletScreen() {
           shape = RoundedCornerShape(30.dp)
         ) {
           WalletBodyContent(
-            onClickPay = { println("Pay button clicked") }
+            onClickPay = {
+              navController.navigate("connect-wallet")
+            }
           )
         }
       }

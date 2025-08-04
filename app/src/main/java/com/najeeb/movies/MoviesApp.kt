@@ -23,6 +23,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.najeeb.movies.screens.addExpense.AddExpenseScreen
+import com.najeeb.movies.screens.connect_wallet.ConnectWalletScreen
 import com.najeeb.movies.screens.home.HomeScreen
 import com.najeeb.movies.screens.navigation.MovieNavigationBar
 import com.najeeb.movies.screens.profile.ProfileScreen
@@ -67,7 +68,8 @@ fun NavHostCompose(navController: NavHostController, innerPadding: PaddingValues
   ) {
     composable("home") { HomeScreen() }
     composable("statistic") { StatisticScreen() }
-    composable("wallet") { WalletScreen() }
+    composable("wallet") { WalletScreen(navController) }
+    composable("connect-wallet") { ConnectWalletScreen() }
     composable("addExpense") { AddExpenseScreen(navController) }
     composable("profile") { ProfileScreen() }
 

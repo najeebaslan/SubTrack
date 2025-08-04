@@ -39,6 +39,7 @@ val NewOutline = Color(0xFFC4C7C7)
 val NewInverseSurface = Color(0xFF2D3132)
 val NewInverseOnSurface = Color(0xFFFBFDFD)
 val NewInversePrimary = Color(0xFFB8C3FF) // Inverse of primary
+val LightPrimaryColor ="#ECF9F8".toColor()
 
 val NewPositive = Color(0xFF00C853) // Green for income
 

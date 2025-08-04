@@ -6,6 +6,7 @@ import com.najeeb.movies.screens.wallet.components.UpcomingBillsListItems
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -15,6 +16,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PageSize
+import androidx.compose.foundation.pager.PagerDefaults
+import androidx.compose.foundation.pager.PagerSnapDistance
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -56,12 +60,12 @@ fun BodyConnectWallet() {
 
   Column(
     Modifier
-      .verticalScroll(rememberScrollState())
-      .padding(horizontal = 16.dp)
-      .fillMaxSize(),
+//      .verticalScroll(rememberScrollState())
+      .padding(horizontal = 16.dp),
+//      .fillMaxSize(),
 
     horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
+  ) {
 
     Spacer(Modifier.height(30.dp))
 
@@ -80,16 +84,15 @@ fun BodyConnectWallet() {
       toggleBorderColor = Color.Transparent,
       activeTextColor = ActiveTextToggleButtonColor,
       inactiveTextColor = ActiveTextToggleButtonColor,
-      )
+    )
 
     Spacer(Modifier.height(16.dp))
 
     HorizontalPager(state = pagerState) { page ->
       when (page) {
-        0 -> CardPage()
-        1 -> CardPage()
+        0 -> CardPage(150)
+        1 -> AccountsPage()
       }
     }
-    Spacer(Modifier.height(150.dp))
   }
 }

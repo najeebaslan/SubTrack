@@ -22,6 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.najeeb.movies.ui.theme.BackgroundCardColor
+import com.najeeb.movies.ui.theme.LightPrimaryColor
 import com.najeeb.movies.ui.theme.toColor
 
 
@@ -67,7 +68,7 @@ fun UpcomingBillsListItems(
     FilledTonalButton(
       onClick = onClickPay,
       colors = ButtonDefaults.filledTonalButtonColors(
-        containerColor = "#ECF9F8".toColor()
+        containerColor =LightPrimaryColor,
       )
     ) {
       Text(

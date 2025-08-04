@@ -15,9 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -28,7 +26,6 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.SolidColor
@@ -39,7 +36,6 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.najeeb.movies.R
 import com.najeeb.movies.components.CustomAppTopBar
-import com.najeeb.movies.components.ToggleButton
 import com.najeeb.movies.core.HelperSize.defaultPadding
 import com.najeeb.movies.screens.home.HomeListItems
 import com.najeeb.movies.screens.home.TransactionItem
@@ -49,7 +45,6 @@ import com.najeeb.movies.ui.theme.IconColor
 import com.najeeb.movies.ui.theme.toColor
 import ir.ehsannarmani.compose_charts.LineChart
 import ir.ehsannarmani.compose_charts.models.AnimationMode
-import ir.ehsannarmani.compose_charts.models.DotProperties
 import ir.ehsannarmani.compose_charts.models.DrawStyle
 import ir.ehsannarmani.compose_charts.models.Line
 
