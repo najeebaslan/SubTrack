@@ -24,6 +24,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.najeeb.movies.R
+import com.najeeb.movies.components.TweenCurrencyCountAnimatableOptimized
+
 import com.najeeb.movies.ui.theme.GrayColor
 
 
@@ -39,8 +41,12 @@ fun TotalBalanceWithIcon() {
       )
     )
     Spacer(Modifier.height(10.dp))
-    Text(
-      "\$ 2,548.00", style = MaterialTheme.typography.displaySmall.copy(
+
+
+    TweenCurrencyCountAnimatableOptimized(
+      targetAmount = 2548.00,
+      durationMillis = 800,
+      textStyle = MaterialTheme.typography.displaySmall.copy(
         fontWeight = FontWeight.Bold
       )
     )
@@ -95,7 +101,7 @@ fun CircleIconWithTitle(icon: Int, title: String) {
             painter = painterResource(icon),
             contentDescription = null,
             tint = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.size(24.dp) // Optional: Set icon size
+            modifier = Modifier.size(24.dp)
           )
 
 

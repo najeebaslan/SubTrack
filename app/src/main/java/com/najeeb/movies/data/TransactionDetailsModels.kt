@@ -38,21 +38,6 @@ data class TransactionDetailsExpenseModels(
   override val fee: String
 ) : TransactionDetailsModels(imageUri, status, time, date, total, fee), Parcelable
 
-//val transactionList = listOf(
-//
-//  TransactionDetailsExpenseModels(
-//    imageUri = R.drawable.upwk,
-//    status = "Income",
-//    time = "10:00 AM",
-//    date = "Feb 30, 2022",
-//    spending = "\$ 870.00",
-//    fee = "- \$ 20.00",
-//    total = "\$ 850.00",
-//    to = "Upwork Escrow"
-//  ),
-//
-//  )
-
 
 val transactionList = listOf<TransactionDetailsModels>(
   TransactionDetailsIncomeModels(

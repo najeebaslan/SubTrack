@@ -31,6 +31,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.najeeb.movies.R
 import com.najeeb.movies.components.CustomAppTopBar
@@ -49,8 +50,9 @@ import ir.ehsannarmani.compose_charts.models.AnimationMode
 @ExperimentalMaterial3Api
 @Composable
 fun StatisticScreen(
-  viewModel: StatisticsViewModel = viewModel()
-) {
+  viewModel: StatisticsViewModel = viewModel(),
+  navController: NavHostController,
+  ) {
   val isDarkMode = isSystemInDarkTheme()
   val systemUiController = rememberSystemUiController()
 
@@ -65,7 +67,8 @@ fun StatisticScreen(
     topBar = {
       CustomAppTopBar(
         title = "Statistic Screen",
-        showBackButton = false,
+        showBackButton = true,
+        onBackClick = { navController.popBackStack() },
         actions = {
           Image(
             painter = painterResource(R.drawable.download_icon),

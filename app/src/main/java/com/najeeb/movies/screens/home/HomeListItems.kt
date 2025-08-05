@@ -24,6 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.najeeb.movies.R
+import com.najeeb.movies.components.StaggeredReveal
 import com.najeeb.movies.core.HelperSize.defaultPadding
 import com.najeeb.movies.data.TransactionDetailsExpenseModels
 import com.najeeb.movies.data.TransactionDetailsIncomeModels
@@ -38,50 +39,53 @@ fun TransactionsSection(
   transactions: List<TransactionDetailsModels>,
   onClickTransaction: (TransactionDetailsModels) -> Unit,
 ) {
-  SeeAllRow(
-    title = R.string.transactions_history,
-    subtitle = R.string.see_all
-  )
+
 
   Spacer(modifier = Modifier.height(10.dp))
 
-  transactions.forEach { transaction ->
-
-    when (transaction) {
-      is TransactionDetailsIncomeModels -> HomeListItems(
-        modifier = Modifier
-          .padding(horizontal = 16.dp, vertical = 8.dp)
-          .clickable(onClick = { onClickTransaction(transaction) }),
-        imageUri = transaction.imageUri,
-        name = transaction.from,
-        date = transaction.date,
-        amount = transaction.total,
-        amountColor = GreenColor,
-      )
-
-      is TransactionDetailsExpenseModels -> HomeListItems(
-        modifier = Modifier
-          .padding(horizontal = 16.dp, vertical = 8.dp)
-          .clickable(onClick = { onClickTransaction(transaction) }),
-        imageUri = transaction.imageUri,
-        name = transaction.total,
-        date = transaction.date,
-        amount = transaction.total,
-        amountColor = ExpenseColor,
-      )
+  transactions.forEachIndexed { index, transaction ->
+    StaggeredReveal(index = index + 1, visibleKey = transaction) {
+      TransactionItem(transaction, onClickTransaction)
     }
-
   }
 
   Spacer(modifier = Modifier.height(16.dp))
 }
 
 @Composable
+fun TransactionItem(
+  transaction: TransactionDetailsModels,
+  onClickTransaction: (TransactionDetailsModels) -> Unit
+) {
+  when (transaction) {
+    is TransactionDetailsIncomeModels -> HomeListItems(
+      modifier = Modifier
+        .padding(horizontal = 16.dp, vertical = 8.dp)
+        .clickable(onClick = { onClickTransaction(transaction) }),
+      imageUri = transaction.imageUri,
+      name = transaction.from,
+      date = transaction.date,
+      amount = transaction.total,
+      amountColor = GreenColor,
+    )
+
+    is TransactionDetailsExpenseModels -> HomeListItems(
+      modifier = Modifier
+        .padding(horizontal = 16.dp, vertical = 8.dp)
+        .clickable(onClick = { onClickTransaction(transaction) }),
+      imageUri = transaction.imageUri,
+      name = transaction.total,
+      date = transaction.date,
+      amount = transaction.total,
+      amountColor = ExpenseColor,
+    )
+  }
+
+}
+
+@Composable
 fun SendAgainSection(images: List<Int>) {
-  SeeAllRow(
-    title = R.string.send_again,
-    subtitle = R.string.see_all
-  )
+
 
   LazyRow(
     modifier = Modifier.padding(vertical = 16.dp),

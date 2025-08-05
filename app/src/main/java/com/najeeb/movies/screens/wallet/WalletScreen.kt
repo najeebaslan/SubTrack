@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.najeeb.movies.components.CustomAppTopBar
@@ -45,6 +46,8 @@ fun WalletScreen(navController: NavHostController) {
         containerColor = Color.Transparent,
         titleColor = Color.White,
         navigationIconColor = Color.White,
+        onBackClick = { navController.popBackStack() },
+
         actions = {
           Box(modifier = Modifier.padding(horizontal = 16.dp)) {
             NotificationIcon(onClick = {})
@@ -72,7 +75,21 @@ fun WalletScreen(navController: NavHostController) {
         ) {
           WalletBodyContent(
             onClickTransactions = { model ->
-              println(model.toString())
+
+//              navController.currentBackStackEntry?.savedStateHandle?.set("transactionModel", model)
+//              navController.navigate("transaction-details") {
+//                // Pop up to the start destination of the graph to
+//                // avoid building up a large stack of destinations
+//                // on the back stack as users select items
+//                popUpTo(navController.graph.findStartDestination().id) {
+//                  saveState = true
+//                }
+//                // Avoid multiple copies of the same destination when
+//                // reselecting the same item
+//                launchSingleTop = true
+//                // Restore state when reselecting a previously selected item
+//                restoreState = true
+//              }
               navController.currentBackStackEntry?.savedStateHandle?.set("transactionModel", model)
               navController.navigate("transaction-details")
             },

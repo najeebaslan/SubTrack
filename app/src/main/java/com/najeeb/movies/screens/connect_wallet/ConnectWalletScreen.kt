@@ -27,9 +27,7 @@ import com.najeeb.movies.screens.home.NotificationIcon
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ConnectWalletScreen(
-  navController: NavHostController,
-  ) {
+fun ConnectWalletScreen(navController: NavHostController, ) {
   val systemUiController = rememberSystemUiController()
   SideEffect {
     systemUiController.setStatusBarColor(

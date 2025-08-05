@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import kotlin.Unit
 
 @Composable
 fun CustomTextField(
@@ -24,17 +25,22 @@ fun CustomTextField(
   backgroundColor: Color = MaterialTheme.colorScheme.background,
   borderColor: Color = MaterialTheme.colorScheme.outline,
   enabled: Boolean = true,
-  keyboardType:KeyboardType=KeyboardType.Number,
+  readOnly: Boolean = false,
+  trailingIcon: @Composable (() -> Unit)? = null,
+  keyboardType: KeyboardType = KeyboardType.Number,
   enableClearButton: Boolean = false,
+  leadingIcon: @Composable (() -> Unit)? = null,
 ) {
   Box(modifier = modifier) {
     OutlinedTextField(
       value = value,
+      readOnly = readOnly,
+
       onValueChange = onValueChange,
       modifier = Modifier
         .fillMaxWidth()
         .background(backgroundColor),
-
+      leadingIcon = leadingIcon,
       singleLine = true,
       shape = RoundedCornerShape(8.dp),
       keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
@@ -47,8 +53,8 @@ fun CustomTextField(
         disabledIndicatorColor = Color.Transparent
       ),
       placeholder = { Text(text = hint, style = hintStyle) },
-      trailingIcon = {
-        if (value.isNotEmpty()&&enableClearButton) {
+      trailingIcon = trailingIcon ?: {
+        if (value.isNotEmpty() && enableClearButton) {
           IconButton(
             onClick = { onValueChange("") }
           ) {

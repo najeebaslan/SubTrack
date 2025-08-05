@@ -32,7 +32,6 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import com.najeeb.movies.R
 import com.najeeb.movies.components.ToggleButton
 import com.najeeb.movies.data.TransactionDetailsExpenseModels
 import com.najeeb.movies.data.TransactionDetailsIncomeModels

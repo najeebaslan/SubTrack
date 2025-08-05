@@ -31,6 +31,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.najeeb.movies.R
 import com.najeeb.movies.components.BaseDivider
@@ -43,7 +44,7 @@ import com.najeeb.movies.ui.theme.GrayColor
 import com.najeeb.movies.ui.theme.toColor
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(  navController: NavHostController) {
   val systemUiController = rememberSystemUiController()
   SideEffect {
     systemUiController.setStatusBarColor(
@@ -58,6 +59,7 @@ fun ProfileScreen() {
         title = "Profile",
         containerColor = Color.Transparent,
         titleColor = Color.White,
+        onBackClick = {navController.popBackStack()},
         navigationIconColor = Color.White,
         actions = {
           Box(modifier = Modifier.padding(horizontal = 16.dp)) {

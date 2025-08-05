@@ -106,7 +106,7 @@ fun BodyTransactionDetailsScreen(model: TransactionDetailsModels) {
 
   Column(
     modifier = Modifier
-      .padding(horizontal = 16.dp)
+      .padding(horizontal = 20.dp)
       .fillMaxSize()
       .verticalScroll(rememberScrollState()),
     horizontalAlignment = Alignment.CenterHorizontally

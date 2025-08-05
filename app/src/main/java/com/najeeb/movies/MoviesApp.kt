@@ -75,14 +75,11 @@ fun NavHostCompose(navController: NavHostController, innerPadding: PaddingValues
   ) {
     composable("home") {
       HomeScreen(onClickTransaction = {
-        navController.currentBackStackEntry?.savedStateHandle?.set(
-          "transactionModel",
-          it
-        )
+        navController.currentBackStackEntry?.savedStateHandle?.set("transactionModel", it)
         navController.navigate("transaction-details")
       })
     }
-    composable("statistic") { StatisticScreen() }
+    composable("statistic") { StatisticScreen(navController = navController) }
     composable("wallet") { WalletScreen(navController) }
     composable("connect-wallet") { ConnectWalletScreen(navController) }
     composable("addExpense") { AddExpenseScreen(navController) }
@@ -100,7 +97,7 @@ fun NavHostCompose(navController: NavHostController, innerPadding: PaddingValues
         TransactionDetailsScreen(model = model, navController)
       }
     }
-    composable("profile") { ProfileScreen() }
+    composable("profile") { ProfileScreen(navController) }
 
   }
 }

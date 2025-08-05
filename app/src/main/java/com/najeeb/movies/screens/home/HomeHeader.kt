@@ -3,6 +3,7 @@ package com.najeeb.movies.screens.home
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowUp
@@ -114,11 +115,12 @@ fun BalanceRow(
         )
       )
     }
-    Icon(
-      Icons.Filled.MoreVert,
+    Image(
+      painter = painterResource(R.drawable.more_hor_icon),
       contentDescription = "Menu",
-      tint = Color.White,
-      modifier = Modifier.clickable(onClick = onMenuClick)
+      modifier = Modifier
+        .clickable(onClick = onMenuClick)
+        .size(22.dp),
     )
   }
 }
