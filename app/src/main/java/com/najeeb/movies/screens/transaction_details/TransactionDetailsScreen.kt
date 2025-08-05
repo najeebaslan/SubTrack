@@ -55,7 +55,7 @@ import com.najeeb.movies.ui.theme.ExpenseColor
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 
-fun TransactionDetailsScreen(model:TransactionDetailsModels,navController: NavHostController,) {
+fun TransactionDetailsScreen(model: TransactionDetailsModels, navController: NavHostController) {
   val systemUiController = rememberSystemUiController()
   SideEffect {
     systemUiController.setStatusBarColor(Color.Transparent, darkIcons = false)
@@ -101,7 +101,8 @@ fun TransactionDetailsScreen(model:TransactionDetailsModels,navController: NavHo
 @Composable
 fun BodyTransactionDetailsScreen(model: TransactionDetailsModels) {
   val transactionColor =
-    if (model is TransactionDetailsIncomeModels) MaterialTheme.colorScheme.primary else ExpenseColor
+    if (model is TransactionDetailsIncomeModels)
+      MaterialTheme.colorScheme.primary else ExpenseColor
 
   Column(
     modifier = Modifier

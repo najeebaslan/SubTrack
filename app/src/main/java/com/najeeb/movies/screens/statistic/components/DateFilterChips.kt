@@ -28,15 +28,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.najeeb.movies.screens.statistic.StatisticsViewModel
 import com.najeeb.movies.ui.theme.GrayColor
 
 
 @Composable
 fun DateFilterChips(
   dates: List<String> = listOf("Day", "Week", "Month", "Year"),
+  viewModel: StatisticsViewModel,
   onDateSelected: (String) -> Unit = {}
 ) {
-  var selectedDate by remember { mutableStateOf(dates[0]) }
+//  var selectedDate by remember { mutableStateOf(dates[0]) }
 
   Row(
     modifier = Modifier
@@ -56,7 +58,8 @@ fun DateFilterChips(
             .height(40.dp)
             .fillMaxWidth(),
           onClick = {
-            selectedDate = date
+//            viewModel.selectedDateFilter
+//            selectedDate = date
             onDateSelected(date)
           },
           label = {
@@ -70,13 +73,13 @@ fun DateFilterChips(
               letterSpacing = 0.4.sp,
             )
           },
-          selected = date == selectedDate,
-          border = if (date == selectedDate) {
+          selected = date == viewModel.selectedDateFilter,
+          border = if (date == viewModel.selectedDateFilter) {
             FilterChipDefaults.filterChipBorder(
               borderColor = MaterialTheme.colorScheme.primary,
               selectedBorderColor = Color.Transparent,
               borderWidth = 1.dp,
-              selected = date == selectedDate,
+              selected = date == viewModel.selectedDateFilter,
               enabled = true,
             )
           } else {

@@ -20,6 +20,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -31,6 +33,7 @@ import com.najeeb.movies.screens.home.HomeScreen
 import com.najeeb.movies.screens.navigation.MovieNavigationBar
 import com.najeeb.movies.screens.profile.ProfileScreen
 import com.najeeb.movies.screens.statistic.StatisticScreen
+import com.najeeb.movies.screens.statistic.StatisticsViewModel
 import com.najeeb.movies.screens.transaction_details.TransactionDetailsScreen
 import com.najeeb.movies.screens.wallet.WalletScreen
 
@@ -52,9 +55,8 @@ fun MoviesApp() {
             pressedElevation = 30.dp,
           ),
 
-        onClick = {
-          navController.navigate("addExpense")
-        }) {
+        onClick = { navController.navigate("addExpense") }
+      ) {
         Icon(Icons.Filled.Add, contentDescription = "Add")
       }
     },
@@ -65,12 +67,21 @@ fun MoviesApp() {
 
 @Composable
 fun NavHostCompose(navController: NavHostController, innerPadding: PaddingValues) {
+
   NavHost(
     navController = navController,
     startDestination = "home",
     modifier = Modifier.padding(innerPadding)
   ) {
-    composable("home") { HomeScreen() }
+    composable("home") {
+      HomeScreen(onClickTransaction = {
+        navController.currentBackStackEntry?.savedStateHandle?.set(
+          "transactionModel",
+          it
+        )
+        navController.navigate("transaction-details")
+      })
+    }
     composable("statistic") { StatisticScreen() }
     composable("wallet") { WalletScreen(navController) }
     composable("connect-wallet") { ConnectWalletScreen(navController) }

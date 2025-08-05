@@ -42,6 +42,7 @@ import com.najeeb.movies.data.transactionList
 import com.najeeb.movies.screens.home.HomeListItems
 import com.najeeb.movies.ui.theme.ActiveTextToggleButtonColor
 import com.najeeb.movies.ui.theme.BackgroundCardColor
+import com.najeeb.movies.ui.theme.ExpenseColor
 import com.najeeb.movies.ui.theme.GreenColor
 import kotlinx.coroutines.launch
 
@@ -140,12 +141,12 @@ fun TransactionsListItems(
       .offset { IntOffset(0, currentImageSize.roundToPx()) },
 
     ) {
-    items(transactionList) { transaction ->
+    items(transactionList.shuffled()) { transaction ->
       when (transaction) {
         is TransactionDetailsIncomeModels -> HomeListItems(
           modifier = Modifier
             .padding(horizontal = 16.dp, vertical = 8.dp)
-            .clickable(onClick = { onClickTransactions(transaction)}),
+            .clickable(onClick = { onClickTransactions(transaction) }),
           imageUri = transaction.imageUri,
           name = transaction.from,
           date = transaction.date,
@@ -156,12 +157,12 @@ fun TransactionsListItems(
         is TransactionDetailsExpenseModels -> HomeListItems(
           modifier = Modifier
             .padding(horizontal = 16.dp, vertical = 8.dp)
-            .clickable(onClick = { onClickTransactions(transaction)}),
+            .clickable(onClick = { onClickTransactions(transaction) }),
           imageUri = transaction.imageUri,
           name = transaction.to,
           date = transaction.date,
           amount = transaction.total,
-          amountColor = GreenColor,
+          amountColor = ExpenseColor,
         )
       }
 
@@ -184,9 +185,9 @@ fun UpcomingBillsLazyColumn(currentImageSize: Dp, onClickPay: () -> Unit) {
     ) {
     items(UpcomingBillsData) { upcomingBills ->
       UpcomingBillsListItems(
-        modifier=  Modifier.padding(vertical = 8.dp),
+        modifier = Modifier.padding(vertical = 8.dp),
         imageUri = upcomingBills.imageUri,
-        paddingImage = 10.dp,
+        paddingImage = 12.dp,
         name = upcomingBills.name,
         date = upcomingBills.date,
         onClickPay = onClickPay

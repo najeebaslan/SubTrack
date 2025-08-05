@@ -158,7 +158,7 @@ fun InviteFriends() {
         )
       }
       Spacer(Modifier.width(13.dp))
-      Text("Invite Friends", style = MaterialTheme.typography.titleLarge)
+      Text("Invite Friends", style = MaterialTheme.typography.titleMedium)
 
     }
   }
@@ -170,17 +170,17 @@ fun RowItems(imageVector: Int, title: String) {
 
   Row(
     verticalAlignment = Alignment.CenterVertically,
-    modifier = Modifier.padding(vertical = 15.dp)
+    modifier = Modifier.padding(vertical = 10.dp)
   ) {
     Icon(
       painter = painterResource(imageVector),
       contentDescription = null,
-      Modifier.size(35.dp),
+      Modifier.size(30.dp),
       tint = GrayColor
     )
 
     Spacer(Modifier.width(15.dp))
-    Text(title, style = MaterialTheme.typography.titleLarge)
+    Text(title, style = MaterialTheme.typography.titleMedium)
 
   }
 }

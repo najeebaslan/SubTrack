@@ -34,7 +34,10 @@ import com.najeeb.movies.ui.theme.GreenColor
 
 
 @Composable
-fun TransactionsSection(transactions: List<TransactionDetailsModels>) {
+fun TransactionsSection(
+  transactions: List<TransactionDetailsModels>,
+  onClickTransaction: (TransactionDetailsModels) -> Unit,
+) {
   SeeAllRow(
     title = R.string.transactions_history,
     subtitle = R.string.see_all
@@ -46,7 +49,9 @@ fun TransactionsSection(transactions: List<TransactionDetailsModels>) {
 
     when (transaction) {
       is TransactionDetailsIncomeModels -> HomeListItems(
-        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+        modifier = Modifier
+          .padding(horizontal = 16.dp, vertical = 8.dp)
+          .clickable(onClick = { onClickTransaction(transaction) }),
         imageUri = transaction.imageUri,
         name = transaction.from,
         date = transaction.date,
@@ -55,7 +60,9 @@ fun TransactionsSection(transactions: List<TransactionDetailsModels>) {
       )
 
       is TransactionDetailsExpenseModels -> HomeListItems(
-        modifier = Modifier.padding(horizontal = 16.dp,vertical = 8.dp),
+        modifier = Modifier
+          .padding(horizontal = 16.dp, vertical = 8.dp)
+          .clickable(onClick = { onClickTransaction(transaction) }),
         imageUri = transaction.imageUri,
         name = transaction.total,
         date = transaction.date,
@@ -124,13 +131,3 @@ data class BalanceInfo(
   val income: String,
   val expense: String
 )
-
-//data class TransactionItem(
-//  val imageUri: Int,
-//  val paddingImage: Dp,
-//  val name: String,
-//  val date: String,
-//  val amount: String,
-//  val isExpense: Boolean,
-//  val amountColor: Color
-//)

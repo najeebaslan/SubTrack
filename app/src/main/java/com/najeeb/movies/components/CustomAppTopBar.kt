@@ -1,6 +1,7 @@
 package com.najeeb.movies.components
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -11,8 +12,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.LayoutDirection
 import com.najeeb.movies.ui.theme.IconColor
 
 
@@ -28,8 +33,10 @@ fun CustomAppTopBar(
   titleColor: Color = IconColor,
   navigationIconColor: Color = IconColor,
 ) {
+  val isRtl = LocalLayoutDirection.current == LayoutDirection.Rtl
+
   CenterAlignedTopAppBar(
-    scrollBehavior =scrollBehavior ,
+    scrollBehavior = scrollBehavior,
     title = {
       Text(
         text = title,
@@ -42,7 +49,11 @@ fun CustomAppTopBar(
       if (showBackButton) {
         IconButton(onClick = onBackClick) {
           Icon(
-            imageVector = Icons.Default.KeyboardArrowLeft,
+            modifier = if (isRtl) Modifier.scale(scaleX = -1f, scaleY = 1f) else Modifier,
+            imageVector =
+//              Icons.Default.ArrowBack,
+
+              Icons.Default.KeyboardArrowLeft,
             contentDescription = "Back",
             tint = navigationIconColor
           )

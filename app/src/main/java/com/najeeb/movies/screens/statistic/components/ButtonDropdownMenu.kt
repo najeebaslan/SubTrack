@@ -26,11 +26,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
-
 @Composable
-fun ButtonDropdownMenu() {
+fun ButtonDropdownMenu(onItemSelected: (String) -> Unit,selectedItem: String) {
   var expanded by remember { mutableStateOf(false) }
-  val items = listOf("Expense", "Income")
+  val items = listOf("Income", "Expense")
+//  var selectedItem by remember { mutableStateOf(items[0]) }
 
   Box(modifier = Modifier.wrapContentSize()) {
     OutlinedButton(
@@ -44,15 +44,15 @@ fun ButtonDropdownMenu() {
     ) {
       Row {
         Text(
-          "Expense",
+          selectedItem,
           style = MaterialTheme.typography.bodyMedium.copy(
             color = MaterialTheme.typography.bodySmall.color,
           ),
         )
         Spacer(modifier = Modifier.weight(1f))
         Icon(
-          Icons.Default.KeyboardArrowDown, contentDescription = "More options",
-
+          Icons.Default.KeyboardArrowDown,
+          contentDescription = "More options",
           modifier = Modifier.size(20.dp),
           tint = MaterialTheme.typography.bodySmall.color,
         )
@@ -60,9 +60,7 @@ fun ButtonDropdownMenu() {
     }
 
     DropdownMenu(
-      modifier = Modifier.background(
-        color = Color.White
-      ),
+      modifier = Modifier.background(color = Color.White),
       expanded = expanded,
       onDismissRequest = { expanded = false }
     ) {
@@ -70,7 +68,8 @@ fun ButtonDropdownMenu() {
         DropdownMenuItem(
           text = { Text(item) },
           onClick = {
-            println("Selected: $item")
+//            selectedItem = item
+            onItemSelected(item)
             expanded = false
           }
         )
@@ -78,3 +77,54 @@ fun ButtonDropdownMenu() {
     }
   }
 }
+//@Composable
+//fun ButtonDropdownMenu() {
+//  var expanded by remember { mutableStateOf(false) }
+//  val items = listOf("Expense", "Income")
+//
+//  Box(modifier = Modifier.wrapContentSize()) {
+//    OutlinedButton(
+//      contentPadding = PaddingValues(
+//        vertical = 8.dp,
+//        horizontal = 20.dp
+//      ),
+//      onClick = { expanded = true },
+//      modifier = Modifier.size(width = 120.dp, height = 40.dp),
+//      shape = RoundedCornerShape(10.dp),
+//    ) {
+//      Row {
+//        Text(
+//          "Expense",
+//          style = MaterialTheme.typography.bodyMedium.copy(
+//            color = MaterialTheme.typography.bodySmall.color,
+//          ),
+//        )
+//        Spacer(modifier = Modifier.weight(1f))
+//        Icon(
+//          Icons.Default.KeyboardArrowDown, contentDescription = "More options",
+//
+//          modifier = Modifier.size(20.dp),
+//          tint = MaterialTheme.typography.bodySmall.color,
+//        )
+//      }
+//    }
+//
+//    DropdownMenu(
+//      modifier = Modifier.background(
+//        color = Color.White
+//      ),
+//      expanded = expanded,
+//      onDismissRequest = { expanded = false }
+//    ) {
+//      items.forEach { item ->
+//        DropdownMenuItem(
+//          text = { Text(item) },
+//          onClick = {
+//            println("Selected: $item")
+//            expanded = false
+//          }
+//        )
+//      }
+//    }
+//  }
+//}

@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.najeeb.movies.R
@@ -55,6 +56,7 @@ fun CardPage(bottomSpacer:Int) {
 
     CustomTextField(
       value = state.name,
+      keyboardType= KeyboardType.Text,
       onValueChange = { state = state.copy(name = it) },
       hint = "NAME ON CARD"
     )

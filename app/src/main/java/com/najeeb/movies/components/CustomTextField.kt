@@ -24,6 +24,7 @@ fun CustomTextField(
   backgroundColor: Color = MaterialTheme.colorScheme.background,
   borderColor: Color = MaterialTheme.colorScheme.outline,
   enabled: Boolean = true,
+  keyboardType:KeyboardType=KeyboardType.Number,
   enableClearButton: Boolean = false,
 ) {
   Box(modifier = modifier) {
@@ -36,7 +37,7 @@ fun CustomTextField(
 
       singleLine = true,
       shape = RoundedCornerShape(8.dp),
-      keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+      keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
       colors = TextFieldDefaults.colors(
         focusedContainerColor = backgroundColor,
         unfocusedContainerColor = backgroundColor,

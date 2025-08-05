@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.najeeb.movies.R
 import com.najeeb.movies.core.HelperSize.paddingBalanceCard
+import com.najeeb.movies.data.TransactionDetailsIncomeModels
 import com.najeeb.movies.data.TransactionDetailsModels
 import com.najeeb.movies.data.transactionList
 import com.najeeb.movies.ui.theme.IconColor
@@ -36,7 +37,8 @@ fun HomeScreen(
     R.drawable.person4
   ),
   onNotificationClick: () -> Unit = {},
-  onMenuClick: () -> Unit = {}
+  onMenuClick: () -> Unit = {},
+  onClickTransaction: (TransactionDetailsModels) -> Unit,
 ) {
   val systemUiController = rememberSystemUiController()
   SideEffect {
@@ -95,7 +97,7 @@ fun HomeScreen(
       ) {
         Spacer(modifier = Modifier.height(40.dp))
 
-        TransactionsSection(transactions)
+        TransactionsSection(transactions, onClickTransaction)
 
         SendAgainSection(sendAgainImages)
 

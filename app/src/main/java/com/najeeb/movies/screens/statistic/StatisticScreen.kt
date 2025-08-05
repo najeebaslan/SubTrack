@@ -1,7 +1,5 @@
 package com.najeeb.movies.screens.statistic
 
-import androidx.compose.animation.core.EaseInOutCubic
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -18,45 +16,44 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.najeeb.movies.R
 import com.najeeb.movies.components.CustomAppTopBar
-import com.najeeb.movies.core.HelperSize.defaultPadding
 import com.najeeb.movies.data.TransactionDetailsExpenseModels
 import com.najeeb.movies.data.TransactionDetailsIncomeModels
-import com.najeeb.movies.data.transactionList
 import com.najeeb.movies.screens.home.HomeListItems
 import com.najeeb.movies.screens.statistic.components.ButtonDropdownMenu
 import com.najeeb.movies.screens.statistic.components.DateFilterChips
 import com.najeeb.movies.ui.theme.ExpenseColor
 import com.najeeb.movies.ui.theme.GreenColor
 import com.najeeb.movies.ui.theme.IconColor
-import com.najeeb.movies.ui.theme.toColor
 import ir.ehsannarmani.compose_charts.LineChart
 import ir.ehsannarmani.compose_charts.models.AnimationMode
-import ir.ehsannarmani.compose_charts.models.DrawStyle
-import ir.ehsannarmani.compose_charts.models.Line
+
 
 @ExperimentalMaterial3Api
 @Composable
-fun StatisticScreen() {
+fun StatisticScreen(
+  viewModel: StatisticsViewModel = viewModel()
+) {
   val isDarkMode = isSystemInDarkTheme()
   val systemUiController = rememberSystemUiController()
+
   SideEffect {
     systemUiController.setStatusBarColor(
       color = Color.Transparent,
@@ -91,13 +88,32 @@ fun StatisticScreen() {
         .padding(padding),
       horizontalAlignment = Alignment.End
     ) {
-      DateFilterChips { selectedDate ->
-        println("Selected date filter: $selectedDate")
-      }
+      DateFilterChips(
+        viewModel = viewModel,
+        onDateSelected = { selectedDate ->
+          viewModel.onDateFilterSelected(selectedDate)
+        }
+
+      )
+
       Spacer(modifier = Modifier.height(20.dp))
-      ButtonDropdownMenu()
+
+      ButtonDropdownMenu(
+        selectedItem = viewModel.selectedTransactionType,
+        onItemSelected = { type ->
+          viewModel.onTransactionTypeSelected(type)
+        }
+      )
+
       Spacer(modifier = Modifier.height(20.dp))
-      StatisticsFlitterRow()
+
+      StatisticsFlitterRow(
+        onSort = { newSortOrder ->
+          viewModel.onSortChanged(newSortOrder)
+        },
+        isAscending = viewModel.isAscendingSort
+      )
+
       Spacer(modifier = Modifier.height(20.dp))
 
       Box(
@@ -106,22 +122,8 @@ fun StatisticScreen() {
           .fillMaxWidth()
       ) {
         LineChart(
-          modifier = Modifier
-            .fillMaxSize(),
-          data = remember {
-            listOf(
-              Line(
-                label = "Windows",
-                values = listOf(10.0, 15.0, 10.0, 19.0, 15.0, 20.0, 15.0, 25.0),
-                color = SolidColor(Color(0xFF23af92)),
-                firstGradientFillColor = Color(0xFF2BC0A1).copy(alpha = .5f),
-                secondGradientFillColor = Color.Transparent,
-                strokeAnimationSpec = tween(2000, easing = EaseInOutCubic),
-                gradientAnimationDelay = 1000,
-                drawStyle = DrawStyle.Stroke(width = 2.dp),
-              )
-            )
-          },
+          modifier = Modifier.fillMaxSize(),
+          data = viewModel.lineChartData,
           animationMode = AnimationMode.Together(delayBuilder = {
             it * 500L
           }),
@@ -130,7 +132,8 @@ fun StatisticScreen() {
 
       Spacer(modifier = Modifier.height(20.dp))
 
-      transactionList.forEach { transaction ->
+      // Display filtered transactions
+      viewModel.filteredTransactions.forEach { transaction ->
         when (transaction) {
           is TransactionDetailsIncomeModels -> HomeListItems(
             modifier = Modifier.padding(vertical = 8.dp),
@@ -151,15 +154,16 @@ fun StatisticScreen() {
           )
         }
       }
-
     }
-
   }
-
 }
 
+
 @Composable
-fun StatisticsFlitterRow(onSort: () -> Unit = {}) {
+fun StatisticsFlitterRow(
+  onSort: (Boolean) -> Unit,
+  isAscending: Boolean
+) {
   Row(
     horizontalArrangement = Arrangement.SpaceBetween,
     modifier = Modifier
@@ -169,16 +173,28 @@ fun StatisticsFlitterRow(onSort: () -> Unit = {}) {
       text = stringResource(id = R.string.top_spending),
       style = MaterialTheme.typography.titleLarge,
     )
-    Image(
-      painter = painterResource(R.drawable.sort_icon),
-      contentDescription = "sort icon",
-      contentScale = ContentScale.Crop,
+    Row(
+      verticalAlignment = Alignment.CenterVertically,
       modifier = Modifier
-        .padding(horizontal = 5.dp)
-        .size(22.dp)
-        .clickable { onSort }
-    )
+        .clickable { onSort(!isAscending) }
+        .padding(4.dp)
+    ) {
+      Text(
+        text = if (isAscending) "Low to High" else "High to Low",
+        style = MaterialTheme.typography.bodySmall.copy(
+          color = MaterialTheme.colorScheme.primary
+        ),
+        modifier = Modifier.padding(end = 4.dp)
+      )
+      Icon(
+        painter = painterResource(
+          R.drawable.sort_icon
+        ),
+        contentDescription = "sort direction",
+        tint = MaterialTheme.colorScheme.primary,
+        modifier = Modifier.size(16.dp)
+      )
+    }
   }
 }
-
 
