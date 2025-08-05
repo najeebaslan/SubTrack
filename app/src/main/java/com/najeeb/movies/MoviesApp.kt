@@ -14,7 +14,9 @@ import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -22,12 +24,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.najeeb.movies.data.TransactionDetailsModels
 import com.najeeb.movies.screens.addExpense.AddExpenseScreen
 import com.najeeb.movies.screens.connect_wallet.ConnectWalletScreen
 import com.najeeb.movies.screens.home.HomeScreen
 import com.najeeb.movies.screens.navigation.MovieNavigationBar
 import com.najeeb.movies.screens.profile.ProfileScreen
 import com.najeeb.movies.screens.statistic.StatisticScreen
+import com.najeeb.movies.screens.transaction_details.TransactionDetailsScreen
 import com.najeeb.movies.screens.wallet.WalletScreen
 
 @Composable
@@ -69,8 +73,22 @@ fun NavHostCompose(navController: NavHostController, innerPadding: PaddingValues
     composable("home") { HomeScreen() }
     composable("statistic") { StatisticScreen() }
     composable("wallet") { WalletScreen(navController) }
-    composable("connect-wallet") { ConnectWalletScreen() }
+    composable("connect-wallet") { ConnectWalletScreen(navController) }
     composable("addExpense") { AddExpenseScreen(navController) }
+    composable("transaction-details") {
+      // This remember ensures that the model is stored once when the screen first opens,
+      // and not recomputed on recomposition or when the back stack changes.
+      val model = remember {
+        navController
+          .previousBackStackEntry
+          ?.savedStateHandle
+          ?.get<TransactionDetailsModels>("transactionModel")
+      }
+
+      if (model != null) {
+        TransactionDetailsScreen(model = model, navController)
+      }
+    }
     composable("profile") { ProfileScreen() }
 
   }

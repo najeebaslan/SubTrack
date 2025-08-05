@@ -5,6 +5,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.najeeb.movies.screens.connect_wallet.ConnectWalletScreen
+import com.najeeb.movies.screens.transaction_details.TransactionDetailsScreen
 import com.najeeb.movies.ui.theme.MoviesTheme
 
 
@@ -15,8 +16,8 @@ class MainActivity : ComponentActivity() {
     enableEdgeToEdge()
     setContent {
       MoviesTheme {
-//        MoviesApp()
-        ConnectWalletScreen()
+        MoviesApp()
+//        TransactionDetailsScreen()
 
       }
     }

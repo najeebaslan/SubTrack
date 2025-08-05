@@ -24,7 +24,7 @@ import androidx.navigation.NavHostController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.najeeb.movies.R
 import com.najeeb.movies.components.CustomAppTopBar
-import com.najeeb.movies.components.HeaderBackground
+import com.najeeb.movies.components.BaseHeaderBackground
 import com.najeeb.movies.screens.addExpense.components.FromAddExpense
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -76,7 +76,7 @@ fun AddExpenseScreen(
           .height(220.dp),
         contentAlignment = Alignment.TopCenter
       ) {
-        HeaderBackground()
+        BaseHeaderBackground()
 
       }
       FromAddExpense(

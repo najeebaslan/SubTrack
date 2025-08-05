@@ -20,10 +20,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.najeeb.movies.R
-import com.najeeb.movies.components.HeaderBackground
+import com.najeeb.movies.components.BaseHeaderBackground
 import com.najeeb.movies.core.HelperSize.paddingBalanceCard
 import com.najeeb.movies.ui.theme.BackgroundCardColor
-import com.najeeb.movies.ui.theme.toColor
 
 @Composable
 fun HomeHeader(
@@ -36,7 +35,7 @@ fun HomeHeader(
     contentAlignment = Alignment.TopCenter
   ) {
 
-    HeaderBackground(modifier)
+    BaseHeaderBackground(modifier)
 
 
     BalanceCard(
@@ -129,7 +128,6 @@ fun BalanceRow(
 fun HomeListItems(
   modifier: Modifier = Modifier,
   imageUri: Int,
-  paddingImage: Dp,
   name: String,
   date: String,
   amount: String? = null,
@@ -148,17 +146,18 @@ fun HomeListItems(
     ) {
       Surface(
         modifier = Modifier
-          .size(70.dp)
-          .padding(10.dp),
+          .size(60.dp),
         shape = RoundedCornerShape(10.dp),
         color = BackgroundCardColor,
       ) {
         Image(
-          modifier = Modifier.padding(paddingImage),
+          modifier = Modifier.padding(10.dp),
           painter = painterResource(id = imageUri),
           contentDescription = "Income",
         )
       }
+
+      Spacer(Modifier.width(10.dp))
       Column(modifier = Modifier.padding(start = 2.dp)) {
         Text(name, style = MaterialTheme.typography.titleMedium)
 

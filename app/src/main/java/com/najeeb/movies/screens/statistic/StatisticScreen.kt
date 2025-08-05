@@ -37,10 +37,14 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.najeeb.movies.R
 import com.najeeb.movies.components.CustomAppTopBar
 import com.najeeb.movies.core.HelperSize.defaultPadding
+import com.najeeb.movies.data.TransactionDetailsExpenseModels
+import com.najeeb.movies.data.TransactionDetailsIncomeModels
+import com.najeeb.movies.data.transactionList
 import com.najeeb.movies.screens.home.HomeListItems
-import com.najeeb.movies.screens.home.TransactionItem
 import com.najeeb.movies.screens.statistic.components.ButtonDropdownMenu
 import com.najeeb.movies.screens.statistic.components.DateFilterChips
+import com.najeeb.movies.ui.theme.ExpenseColor
+import com.najeeb.movies.ui.theme.GreenColor
 import com.najeeb.movies.ui.theme.IconColor
 import com.najeeb.movies.ui.theme.toColor
 import ir.ehsannarmani.compose_charts.LineChart
@@ -81,7 +85,7 @@ fun StatisticScreen() {
   ) { padding ->
     Column(
       modifier = Modifier
-        .padding(horizontal = defaultPadding.dp)
+        .padding(horizontal = 16.dp)
         .fillMaxWidth()
         .verticalScroll(rememberScrollState())
         .padding(padding),
@@ -96,9 +100,11 @@ fun StatisticScreen() {
       StatisticsFlitterRow()
       Spacer(modifier = Modifier.height(20.dp))
 
-      Box(modifier = Modifier
-        .height(200.dp)
-        .fillMaxWidth()) {
+      Box(
+        modifier = Modifier
+          .height(200.dp)
+          .fillMaxWidth()
+      ) {
         LineChart(
           modifier = Modifier
             .fillMaxSize(),
@@ -124,17 +130,30 @@ fun StatisticScreen() {
 
       Spacer(modifier = Modifier.height(20.dp))
 
-      defaultTransactions.forEach { transaction ->
-        HomeListItems(
-          imageUri = transaction.imageUri,
-          paddingImage = transaction.paddingImage,
-          name = transaction.name,
-          date = transaction.date,
-          amount = transaction.amount,
-          amountColor = transaction.amountColor,
-        )
+      transactionList.forEach { transaction ->
+        when (transaction) {
+          is TransactionDetailsIncomeModels -> HomeListItems(
+            modifier = Modifier.padding(vertical = 8.dp),
+            imageUri = transaction.imageUri,
+            name = transaction.from,
+            date = transaction.date,
+            amount = transaction.total,
+            amountColor = GreenColor,
+          )
+
+          is TransactionDetailsExpenseModels -> HomeListItems(
+            modifier = Modifier.padding(vertical = 8.dp),
+            imageUri = transaction.imageUri,
+            name = transaction.total,
+            date = transaction.date,
+            amount = transaction.total,
+            amountColor = ExpenseColor,
+          )
+        }
       }
+
     }
+
   }
 
 }
@@ -162,29 +181,4 @@ fun StatisticsFlitterRow(onSort: () -> Unit = {}) {
   }
 }
 
-private val defaultTransactions = listOf(
-  TransactionItem(
-    imageUri = R.drawable.starbucks_logo,
-    paddingImage = 1.dp,
-    name = "Starbucks",
-    date = "Jan 12, 2022",
-    amount = "- \$ 150.00",
-    amountColor = "#F95B51".toColor()
-  ),
-  TransactionItem(
-    imageUri = R.drawable.girl_image,
-    paddingImage = 10.dp,
-    name = "Transfer",
-    date = "Yesterday",
-    amount = "- \$ 85.00",
-    amountColor = "#25A969".toColor()
-  ),
-  TransactionItem(
-    imageUri = R.drawable.youtube,
-    paddingImage = 10.dp,
-    name = "Youtube",
-    date = "Jan 16, 2022",
-    amount = "- \$ 11.99",
-    amountColor = "#F95B51".toColor()
-  )
-)
+

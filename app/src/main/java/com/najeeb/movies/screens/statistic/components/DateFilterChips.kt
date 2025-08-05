@@ -40,7 +40,6 @@ fun DateFilterChips(
 
   Row(
     modifier = Modifier
-      .padding(8.dp)
       .fillMaxWidth()
       .horizontalScroll(rememberScrollState()),
     horizontalArrangement = Arrangement.SpaceBetween,

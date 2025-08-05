@@ -41,6 +41,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.najeeb.movies.components.BaseOutlinedButton
 import com.najeeb.movies.data.listAccounts
 import com.najeeb.movies.ui.theme.BackgroundCardColor
 import com.najeeb.movies.ui.theme.GrayColor
@@ -68,23 +69,7 @@ fun AccountsPage() {
 
     item {
       Spacer(Modifier.height(80.dp))
-      OutlinedButton(
-        border = BorderStroke(
-          color = MaterialTheme.colorScheme.primary,
-          width = 0.5.dp,
-        ),
-        modifier = Modifier
-          .fillMaxWidth()
-          .height(70.dp)
-          .padding(vertical = 8.dp),
-        onClick = {}
-      ) {
-        Text(
-          text = "Next", style = MaterialTheme.typography.titleMedium.copy(
-            color = MaterialTheme.colorScheme.primary
-          )
-        )
-      }
+      BaseOutlinedButton(title =  "Next", onClick = {})
     }
     item {
       Spacer(Modifier.height(150.dp))

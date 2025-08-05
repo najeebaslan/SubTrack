@@ -1,5 +1,6 @@
 package com.najeeb.movies.screens.wallet.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -31,12 +32,17 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.najeeb.movies.R
 import com.najeeb.movies.components.ToggleButton
-import com.najeeb.movies.data.TransactionsData
+import com.najeeb.movies.data.TransactionDetailsExpenseModels
+import com.najeeb.movies.data.TransactionDetailsIncomeModels
+import com.najeeb.movies.data.TransactionDetailsModels
 import com.najeeb.movies.data.UpcomingBillsData
+import com.najeeb.movies.data.transactionList
 import com.najeeb.movies.screens.home.HomeListItems
 import com.najeeb.movies.ui.theme.ActiveTextToggleButtonColor
 import com.najeeb.movies.ui.theme.BackgroundCardColor
+import com.najeeb.movies.ui.theme.GreenColor
 import kotlinx.coroutines.launch
 
 
@@ -44,8 +50,10 @@ import kotlinx.coroutines.launch
 fun WalletBodyContent(
   maxImageSize: Dp = 320.dp,
   minImageSize: Dp = 100.dp,
-  onClickPay: () -> Unit
-) {
+  onClickPay: () -> Unit,
+  onClickTransactions: (TransactionDetailsModels) -> Unit,
+
+  ) {
   var currentImageSize by remember { mutableStateOf(maxImageSize) }
   var imageScale by remember { mutableFloatStateOf(1f) }
   val pagerState = rememberPagerState(
@@ -78,14 +86,13 @@ fun WalletBodyContent(
   Box(Modifier.nestedScroll(nestedScrollConnection)) {
     HorizontalPager(state = pagerState) { page ->
       when (page) {
-        0 -> TransactionsListItems(currentImageSize)
+        0 -> TransactionsListItems(currentImageSize, onClickTransactions)
         1 -> UpcomingBillsLazyColumn(currentImageSize, onClickPay)
       }
     }
 
     Column(
       Modifier
-        .padding(horizontal = 16.dp)
         .size(maxImageSize)
         .align(Alignment.TopCenter)
         .graphicsLayer {
@@ -117,28 +124,51 @@ fun WalletBodyContent(
         activeTextColor = ActiveTextToggleButtonColor,
         inactiveTextColor = ActiveTextToggleButtonColor,
       )
+
     }
   }
 }
 
 @Composable
-fun TransactionsListItems(currentImageSize: Dp) {
+fun TransactionsListItems(
+  currentImageSize: Dp,
+  onClickTransactions: (TransactionDetailsModels) -> Unit
+) {
   LazyColumn(
     Modifier
       .fillMaxSize()
-      .padding(horizontal = 16.dp)
       .offset { IntOffset(0, currentImageSize.roundToPx()) },
 
     ) {
-    items(TransactionsData) { transaction ->
-      HomeListItems(
-        imageUri = transaction.imageUri,
-        paddingImage = transaction.paddingImage,
-        name = transaction.name,
-        date = transaction.date,
-        amount = transaction.amount,
-        amountColor = transaction.amountColor,
-      )
+    items(transactionList) { transaction ->
+      when (transaction) {
+        is TransactionDetailsIncomeModels -> HomeListItems(
+          modifier = Modifier
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .clickable(onClick = { onClickTransactions(transaction)}),
+          imageUri = transaction.imageUri,
+          name = transaction.from,
+          date = transaction.date,
+          amount = transaction.total,
+          amountColor = GreenColor,
+        )
+
+        is TransactionDetailsExpenseModels -> HomeListItems(
+          modifier = Modifier
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .clickable(onClick = { onClickTransactions(transaction)}),
+          imageUri = transaction.imageUri,
+          name = transaction.to,
+          date = transaction.date,
+          amount = transaction.total,
+          amountColor = GreenColor,
+        )
+      }
+
+    }
+    item {
+      Spacer(Modifier.height(210.dp))
+
     }
   }
 }
@@ -154,12 +184,17 @@ fun UpcomingBillsLazyColumn(currentImageSize: Dp, onClickPay: () -> Unit) {
     ) {
     items(UpcomingBillsData) { upcomingBills ->
       UpcomingBillsListItems(
+        modifier=  Modifier.padding(vertical = 8.dp),
         imageUri = upcomingBills.imageUri,
-        paddingImage = upcomingBills.paddingImage,
+        paddingImage = 10.dp,
         name = upcomingBills.name,
         date = upcomingBills.date,
         onClickPay = onClickPay
       )
+    }
+    item {
+      Spacer(Modifier.height(210.dp))
+
     }
   }
 }

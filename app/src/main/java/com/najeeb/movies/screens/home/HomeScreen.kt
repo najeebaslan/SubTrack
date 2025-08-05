@@ -12,9 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.najeeb.movies.R
 import com.najeeb.movies.core.HelperSize.paddingBalanceCard
-import com.najeeb.movies.data.defaultSendAgainImages
-import com.najeeb.movies.data.TransactionsData
+import com.najeeb.movies.data.TransactionDetailsModels
+import com.najeeb.movies.data.transactionList
 import com.najeeb.movies.ui.theme.IconColor
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -26,8 +27,14 @@ fun HomeScreen(
     income = "\$1,500.00",
     expense = "\$800.00"
   ),
-  transactions: List<TransactionItem> = TransactionsData,
-  sendAgainImages: List<Int> = defaultSendAgainImages,
+  transactions: List<TransactionDetailsModels> = transactionList,
+  sendAgainImages: List<Int> = listOf(
+    R.drawable.girl_image,
+    R.drawable.person1,
+    R.drawable.person2,
+    R.drawable.person3,
+    R.drawable.person4
+  ),
   onNotificationClick: () -> Unit = {},
   onMenuClick: () -> Unit = {}
 ) {

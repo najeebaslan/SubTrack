@@ -1,4 +1,5 @@
 package com.najeeb.movies.screens.home
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -24,10 +25,16 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.najeeb.movies.R
 import com.najeeb.movies.core.HelperSize.defaultPadding
+import com.najeeb.movies.data.TransactionDetailsExpenseModels
+import com.najeeb.movies.data.TransactionDetailsIncomeModels
+import com.najeeb.movies.data.TransactionDetailsModels
+import com.najeeb.movies.screens.transaction_details.InfoRow
+import com.najeeb.movies.ui.theme.ExpenseColor
+import com.najeeb.movies.ui.theme.GreenColor
 
 
 @Composable
-fun TransactionsSection(transactions: List<TransactionItem>) {
+fun TransactionsSection(transactions: List<TransactionDetailsModels>) {
   SeeAllRow(
     title = R.string.transactions_history,
     subtitle = R.string.see_all
@@ -36,15 +43,27 @@ fun TransactionsSection(transactions: List<TransactionItem>) {
   Spacer(modifier = Modifier.height(10.dp))
 
   transactions.forEach { transaction ->
-    HomeListItems(
-      modifier = Modifier.padding(horizontal = 16.dp),
-      imageUri = transaction.imageUri,
-      paddingImage = transaction.paddingImage,
-      name = transaction.name,
-      date = transaction.date,
-      amount = transaction.amount,
-      amountColor = transaction.amountColor,
-    )
+
+    when (transaction) {
+      is TransactionDetailsIncomeModels -> HomeListItems(
+        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+        imageUri = transaction.imageUri,
+        name = transaction.from,
+        date = transaction.date,
+        amount = transaction.total,
+        amountColor = GreenColor,
+      )
+
+      is TransactionDetailsExpenseModels -> HomeListItems(
+        modifier = Modifier.padding(horizontal = 16.dp,vertical = 8.dp),
+        imageUri = transaction.imageUri,
+        name = transaction.total,
+        date = transaction.date,
+        amount = transaction.total,
+        amountColor = ExpenseColor,
+      )
+    }
+
   }
 
   Spacer(modifier = Modifier.height(16.dp))
@@ -106,11 +125,12 @@ data class BalanceInfo(
   val expense: String
 )
 
-data class TransactionItem(
-  val imageUri: Int,
-  val paddingImage: Dp,
-  val name: String,
-  val date: String,
-  val amount: String,
-  val amountColor: Color
-)
+//data class TransactionItem(
+//  val imageUri: Int,
+//  val paddingImage: Dp,
+//  val name: String,
+//  val date: String,
+//  val amount: String,
+//  val isExpense: Boolean,
+//  val amountColor: Color
+//)

@@ -40,17 +40,15 @@ val NewInverseSurface = Color(0xFF2D3132)
 val NewInverseOnSurface = Color(0xFFFBFDFD)
 val NewInversePrimary = Color(0xFFB8C3FF) // Inverse of primary
 val LightPrimaryColor ="#ECF9F8".toColor()
-
 val NewPositive = Color(0xFF00C853) // Green for income
+val ExpenseColor="#F95B51".toColor()
+val GreenColor="#25A969".toColor()
 
 val BackgroundCardColor: Color
   @Composable get() = if (isSystemInDarkTheme()) Color.Gray.copy(alpha = 0.1f) else "#F0F6F5".toColor()
 
 val ActiveTextToggleButtonColor: Color
   @Composable get() = if (isSystemInDarkTheme()) MaterialTheme.typography.titleLarge.color else GrayColor
-
-
-
 
 val BlackAndWhite: Color
   @Composable get() = if (isSystemInDarkTheme()) Color.White else Color.Black

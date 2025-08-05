@@ -47,8 +47,7 @@ fun UpcomingBillsListItems(
     ) {
       Surface(
         modifier = Modifier
-          .size(70.dp)
-          .padding(10.dp),
+          .size(60.dp),
         shape = RoundedCornerShape(10.dp),
         color = BackgroundCardColor,
       ) {
@@ -58,13 +57,14 @@ fun UpcomingBillsListItems(
           contentDescription = "Income",
         )
       }
-      Column(modifier = Modifier.padding(start = 2.dp)) {
+      Column(modifier = Modifier.padding(start = 12.dp)) {
         Text(name, style = MaterialTheme.typography.titleMedium)
 
         Spacer(modifier = Modifier.height(4.dp))
         Text(date, style = MaterialTheme.typography.bodySmall)
       }
     }
+
     FilledTonalButton(
       onClick = onClickPay,
       colors = ButtonDefaults.filledTonalButtonColors(

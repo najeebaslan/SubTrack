@@ -42,7 +42,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.najeeb.movies.components.ToggleButton
-import com.najeeb.movies.data.TransactionsData
 import com.najeeb.movies.data.UpcomingBillsData
 import com.najeeb.movies.ui.theme.ActiveTextToggleButtonColor
 
@@ -59,11 +58,7 @@ fun BodyConnectWallet() {
   val coroutineScope = rememberCoroutineScope()
 
   Column(
-    Modifier
-//      .verticalScroll(rememberScrollState())
-      .padding(horizontal = 16.dp),
-//      .fillMaxSize(),
-
+    Modifier.padding(horizontal = 16.dp),
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
 

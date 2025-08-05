@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -21,14 +22,14 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.najeeb.movies.components.CustomAppTopBar
-import com.najeeb.movies.components.HeaderBackground
+import com.najeeb.movies.components.BaseHeaderBackground
 import com.najeeb.movies.screens.home.NotificationIcon
 import com.najeeb.movies.screens.wallet.components.WalletBodyContent
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WalletScreen(navController: NavHostController,) {
+fun WalletScreen(navController: NavHostController) {
   val systemUiController = rememberSystemUiController()
   SideEffect {
     systemUiController.setStatusBarColor(
@@ -60,7 +61,7 @@ fun WalletScreen(navController: NavHostController,) {
       verticalArrangement = Arrangement.Top
     ) {
       Box {
-        HeaderBackground(modifier = Modifier.height(170.dp))
+        BaseHeaderBackground(modifier = Modifier.height(170.dp))
 
         Surface(
           color = MaterialTheme.colorScheme.background,
@@ -70,10 +71,16 @@ fun WalletScreen(navController: NavHostController,) {
           shape = RoundedCornerShape(30.dp)
         ) {
           WalletBodyContent(
+            onClickTransactions = { model ->
+              println(model.toString())
+              navController.currentBackStackEntry?.savedStateHandle?.set("transactionModel", model)
+              navController.navigate("transaction-details")
+            },
             onClickPay = {
               navController.navigate("connect-wallet")
             }
           )
+
         }
       }
     }

@@ -16,12 +16,11 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.najeeb.movies.components.CustomAppTopBar
-import com.najeeb.movies.components.HeaderBackground
+import com.najeeb.movies.components.BaseHeaderBackground
 import com.najeeb.movies.screens.connect_wallet.components.BodyConnectWallet
 import com.najeeb.movies.screens.home.NotificationIcon
 
@@ -29,7 +28,7 @@ import com.najeeb.movies.screens.home.NotificationIcon
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ConnectWalletScreen(
-//  navController: NavHostController,
+  navController: NavHostController,
   ) {
   val systemUiController = rememberSystemUiController()
   SideEffect {
@@ -46,7 +45,7 @@ fun ConnectWalletScreen(
         containerColor = Color.Transparent,
         titleColor = Color.White,
         navigationIconColor = Color.White,
-//        onBackClick = { navController.popBackStack() },
+        onBackClick = { navController.popBackStack() },
         actions = {
           Box(modifier = Modifier.padding(horizontal = 16.dp)) {
             NotificationIcon(onClick = {})
@@ -63,7 +62,7 @@ fun ConnectWalletScreen(
       verticalArrangement = Arrangement.Top
     ) {
       Box {
-        HeaderBackground(modifier = Modifier.height(170.dp))
+        BaseHeaderBackground(modifier = Modifier.height(170.dp))
 
         Surface(
           color = MaterialTheme.colorScheme.background,

@@ -33,8 +33,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.najeeb.movies.R
+import com.najeeb.movies.components.BaseDivider
 import com.najeeb.movies.components.CustomAppTopBar
-import com.najeeb.movies.components.HeaderBackground
+import com.najeeb.movies.components.BaseHeaderBackground
 import com.najeeb.movies.core.HelperSize.defaultPadding
 import com.najeeb.movies.screens.home.NotificationIcon
 import com.najeeb.movies.ui.theme.BackgroundCardColor
@@ -73,7 +74,7 @@ fun ProfileScreen() {
       horizontalAlignment = Alignment.Start,
       verticalArrangement = Arrangement.Top
     ) {
-      HeaderBackground(modifier = Modifier.height(220.dp))
+      BaseHeaderBackground(modifier = Modifier.height(220.dp))
       UserInfo(modifier = Modifier.align(Alignment.CenterHorizontally))
       Column(
         modifier = Modifier
@@ -83,12 +84,7 @@ fun ProfileScreen() {
         Spacer(Modifier.height(defaultPadding.dp))
         InviteFriends()
         Spacer(Modifier.height(defaultPadding.dp))
-        Divider(
-          color = "#EEEEEE".toColor(),
-          modifier = Modifier
-            .fillMaxWidth()
-            .height(1.dp)
-        )
+        BaseDivider()
 
 
         RowItems(
