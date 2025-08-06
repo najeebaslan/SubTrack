@@ -1,5 +1,6 @@
 package com.najeeb.movies.screens.onboarding
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -60,30 +61,38 @@ fun OnboardingScreen(
   }
 }
 
+@SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
- fun OnboardingImageSection() {
+fun OnboardingImageSection() {
   Box(
-    modifier = Modifier.size(350.dp),
+//    modifier = Modifier.size(350.dp),
     contentAlignment = Alignment.BottomCenter
   ) {
-    Image(
-      painter = painterResource(id = R.drawable.onboarding_background),
-      contentDescription = null,
-      contentScale = ContentScale.FillBounds,
-      modifier = Modifier.size(400.dp),
-    )
 
+    BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
+
+      Image(
+        painter = painterResource(id = R.drawable.onboarding_background),
+        contentDescription = null,
+        modifier = Modifier
+          .fillMaxWidth()
+          .width(maxWidth)
+          .height(maxHeight / 2),
+      )
+    }
     Box(
       modifier = Modifier
         .fillMaxWidth()
-        .offset(y = 10.dp),
+        .offset(y = (-10).dp),
       contentAlignment = Alignment.BottomCenter
     ) {
       Image(
         painter = painterResource(id = R.drawable.onboarding_man),
         contentDescription = stringResource(R.string.onboarding_title),
         alignment = Alignment.BottomCenter,
-        modifier = Modifier.size(300.93.dp)
+        modifier = Modifier
+          .size(300.93.dp)
+          .aspectRatio(12f / 16f)
       )
     }
   }
