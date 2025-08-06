@@ -9,7 +9,7 @@ https://github.com/user-attachments/assets/06fae8b9-b7dc-46ca-9687-5030addecee6
 A modern Android app for managing subscriptions, bills, and payments with a beautiful UI and optimized navigation.
 
 ---
-
+[Download Apk](https://github.com/najeebaslan/SubTrack/releases/download/v1.0.0/app-release.apk)
 ## ✨ Features
 
 - **Wallet & Upcoming Bills**: View and manage all your upcoming subscription bills in one place.
