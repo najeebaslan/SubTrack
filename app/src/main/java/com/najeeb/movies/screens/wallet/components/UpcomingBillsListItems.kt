@@ -1,6 +1,7 @@
 package com.najeeb.movies.screens.wallet.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -30,14 +31,15 @@ import com.najeeb.movies.ui.theme.toColor
 fun UpcomingBillsListItems(
   modifier: Modifier = Modifier,
   imageUri: Int,
-  paddingImage: Dp,
   name: String,
   date: String,
-  onClickPay: () -> Unit
+  onClickPay: () -> Unit,
+  onClickBillDetails: () -> Unit
 ) {
   Row(
     modifier = modifier
-      .fillMaxWidth(),
+      .fillMaxWidth()
+      .clickable { onClickBillDetails() },
     horizontalArrangement = Arrangement.SpaceBetween,
     verticalAlignment = Alignment.CenterVertically
   ) {
@@ -52,7 +54,7 @@ fun UpcomingBillsListItems(
         color = BackgroundCardColor,
       ) {
         Image(
-          modifier = Modifier.padding(paddingImage),
+          modifier = Modifier.padding(12.dp),
           painter = painterResource(id = imageUri),
           contentDescription = "Income",
         )
@@ -66,7 +68,10 @@ fun UpcomingBillsListItems(
     }
 
     FilledTonalButton(
-      onClick = onClickPay,
+      onClick = { 
+        // Stop event propagation to prevent triggering the row click
+        onClickPay()
+      },
       colors = ButtonDefaults.filledTonalButtonColors(
         containerColor =LightPrimaryColor,
       )

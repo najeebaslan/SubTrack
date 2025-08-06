@@ -20,7 +20,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.najeeb.movies.screens.wallet.WalletViewModel
 
 @Composable
-fun TweenCurrencyCountAnimatableOptimized(
+fun TweenCurrencyCount(
   targetAmount: Double,
   viewModel: WalletViewModel = viewModel(),
   durationMillis: Int = 800,

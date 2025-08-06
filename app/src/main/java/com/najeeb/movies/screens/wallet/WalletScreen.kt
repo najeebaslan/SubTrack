@@ -24,6 +24,8 @@ import androidx.navigation.NavHostController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.najeeb.movies.components.CustomAppTopBar
 import com.najeeb.movies.components.BaseHeaderBackground
+import com.najeeb.movies.data.UpcomingBillsItem
+import com.najeeb.movies.navigation.NavigationHelper
 import com.najeeb.movies.screens.home.NotificationIcon
 import com.najeeb.movies.screens.wallet.components.WalletBodyContent
 
@@ -75,26 +77,15 @@ fun WalletScreen(navController: NavHostController) {
         ) {
           WalletBodyContent(
             onClickTransactions = { model ->
-
-//              navController.currentBackStackEntry?.savedStateHandle?.set("transactionModel", model)
-//              navController.navigate("transaction-details") {
-//                // Pop up to the start destination of the graph to
-//                // avoid building up a large stack of destinations
-//                // on the back stack as users select items
-//                popUpTo(navController.graph.findStartDestination().id) {
-//                  saveState = true
-//                }
-//                // Avoid multiple copies of the same destination when
-//                // reselecting the same item
-//                launchSingleTop = true
-//                // Restore state when reselecting a previously selected item
-//                restoreState = true
-//              }
               navController.currentBackStackEntry?.savedStateHandle?.set("transactionModel", model)
               navController.navigate("transaction-details")
             },
             onClickPay = {
-              navController.navigate("connect-wallet")
+              NavigationHelper.navigateToConnectWallet(navController)
+            },
+            onClickBillDetails = { billModel ->
+              println("------------------------------- ${billModel.toString()} --------------------------------")
+              NavigationHelper.navigateToBillDetails(navController, billModel)
             }
           )
 

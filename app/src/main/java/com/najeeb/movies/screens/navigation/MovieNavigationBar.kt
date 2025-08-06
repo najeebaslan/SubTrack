@@ -1,5 +1,4 @@
 package com.najeeb.movies.screens.navigation
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.height

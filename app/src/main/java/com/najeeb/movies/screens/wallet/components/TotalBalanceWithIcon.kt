@@ -24,7 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.najeeb.movies.R
-import com.najeeb.movies.components.TweenCurrencyCountAnimatableOptimized
+import com.najeeb.movies.components.TweenCurrencyCount
 
 import com.najeeb.movies.ui.theme.GrayColor
 
@@ -43,7 +43,7 @@ fun TotalBalanceWithIcon() {
     Spacer(Modifier.height(10.dp))
 
 
-    TweenCurrencyCountAnimatableOptimized(
+    TweenCurrencyCount(
       targetAmount = 2548.00,
       durationMillis = 800,
       textStyle = MaterialTheme.typography.displaySmall.copy(

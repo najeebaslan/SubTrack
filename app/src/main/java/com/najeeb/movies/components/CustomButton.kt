@@ -15,12 +15,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 
 @Composable
 fun GradientButton(
   text: String,
+  paddingHorizontal: Int = 20,
   gradient: Brush? = null,
   @SuppressLint("ModifierParameter") modifier: Modifier = Modifier,
   onClick: () -> Unit
@@ -29,7 +31,7 @@ fun GradientButton(
     modifier = modifier
       .fillMaxWidth()
       .height(70.dp)
-      .padding(horizontal = 20.dp, vertical = 8.dp)
+      .padding(horizontal = paddingHorizontal.dp, vertical = 8.dp)
       .shadow(
         shape = RoundedCornerShape(50.dp),
         clip = false,
@@ -41,7 +43,7 @@ fun GradientButton(
     colors = ButtonDefaults.buttonColors(
       containerColor = Color.Transparent,
 
-    ),
+      ),
     contentPadding = PaddingValues(),
     onClick = onClick,
   ) {

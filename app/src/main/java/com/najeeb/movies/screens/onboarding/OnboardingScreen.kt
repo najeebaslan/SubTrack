@@ -121,7 +121,7 @@ private fun OnboardingTextSection(
 
     IsHaveAccount(
       isSignIn = false,
-      onNavigate = { onLoginClick }
+      onClick = onLoginClick
     )
 
     Spacer(Modifier.height(defaultPadding.dp * 2))

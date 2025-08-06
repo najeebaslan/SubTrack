@@ -50,7 +50,6 @@ val transactionList = listOf<TransactionDetailsModels>(
     total = "\$1,160.00",
     fee = "- \$40.00"
   ),
-  // Income
 
   TransactionDetailsExpenseModels(
     to = "TransferWise",
@@ -126,9 +125,6 @@ val transactionList = listOf<TransactionDetailsModels>(
     fee = "- \$20.00"
   ),
 
-  // Expense
-
-
   TransactionDetailsExpenseModels(
     to = "Toptal Subscription",
     spending = "\$820.00",
@@ -139,5 +135,6 @@ val transactionList = listOf<TransactionDetailsModels>(
     total = "\$820.00",
     fee = "- \$0.00"
   ),
-
   )
+
+

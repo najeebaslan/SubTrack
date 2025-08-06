@@ -27,7 +27,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.najeeb.movies.data.TransactionDetailsModels
+import com.najeeb.movies.data.UpcomingBillsItem
+import com.najeeb.movies.data.BillPaymentModel
+import com.najeeb.movies.navigation.ScreenRoutes
 import com.najeeb.movies.screens.addExpense.AddExpenseScreen
+import com.najeeb.movies.screens.bill_details.BillDetailsScreen
+import com.najeeb.movies.screens.bill_payment.BillPaymentScreen
+import com.najeeb.movies.screens.payment_successfully.PaymentSuccessfullyScreen
 import com.najeeb.movies.screens.connect_wallet.ConnectWalletScreen
 import com.najeeb.movies.screens.home.HomeScreen
 import com.najeeb.movies.screens.navigation.MovieNavigationBar
@@ -55,7 +61,7 @@ fun MoviesApp() {
             pressedElevation = 30.dp,
           ),
 
-        onClick = { navController.navigate("addExpense") }
+        onClick = { navController.navigate(ScreenRoutes.ADD_EXPENSE) }
       ) {
         Icon(Icons.Filled.Add, contentDescription = "Add")
       }
@@ -70,34 +76,76 @@ fun NavHostCompose(navController: NavHostController, innerPadding: PaddingValues
 
   NavHost(
     navController = navController,
-    startDestination = "home",
+    startDestination = ScreenRoutes.HOME,
     modifier = Modifier.padding(innerPadding)
   ) {
-    composable("home") {
+    composable(ScreenRoutes.HOME) {
       HomeScreen(onClickTransaction = {
-        navController.currentBackStackEntry?.savedStateHandle?.set("transactionModel", it)
-        navController.navigate("transaction-details")
+        navController.currentBackStackEntry?.savedStateHandle?.set(ScreenRoutes.Keys.TRANSACTION_MODEL, it)
+        navController.navigate(ScreenRoutes.TRANSACTION_DETAILS)
       })
     }
-    composable("statistic") { StatisticScreen(navController = navController) }
-    composable("wallet") { WalletScreen(navController) }
-    composable("connect-wallet") { ConnectWalletScreen(navController) }
-    composable("addExpense") { AddExpenseScreen(navController) }
-    composable("transaction-details") {
+    composable(ScreenRoutes.STATISTIC) { StatisticScreen(navController = navController) }
+    composable(ScreenRoutes.WALLET) { WalletScreen(navController) }
+    composable(ScreenRoutes.CONNECT_WALLET) { ConnectWalletScreen(navController) }
+    composable(ScreenRoutes.ADD_EXPENSE) { AddExpenseScreen(navController) }
+    composable(ScreenRoutes.TRANSACTION_DETAILS) {
       // This remember ensures that the model is stored once when the screen first opens,
       // and not recomputed on recomposition or when the back stack changes.
       val model = remember {
         navController
           .previousBackStackEntry
           ?.savedStateHandle
-          ?.get<TransactionDetailsModels>("transactionModel")
+          ?.get<TransactionDetailsModels>(ScreenRoutes.Keys.TRANSACTION_MODEL)
       }
 
       if (model != null) {
         TransactionDetailsScreen(model = model, navController)
       }
     }
-    composable("profile") { ProfileScreen(navController) }
+    composable(ScreenRoutes.BILL_DETAILS) {
+      // This remember ensures that the model is stored once when the screen first opens,
+      // and not recomputed on recomposition or when the back stack changes.
+      val model = remember {
+        navController
+          .previousBackStackEntry
+          ?.savedStateHandle
+          ?.get<UpcomingBillsItem>(ScreenRoutes.Keys.BILL_MODEL)
+      }
+
+      if (model != null) {
+        BillDetailsScreen(model = model, navController)
+      }
+    }
+    composable(ScreenRoutes.BILL_PAYMENT) {
+      // This remember ensures that the model is stored once when the screen first opens,
+      // and not recomputed on recomposition or when the back stack changes.
+      val model = remember {
+        navController
+          .previousBackStackEntry
+          ?.savedStateHandle
+          ?.get<BillPaymentModel>(ScreenRoutes.Keys.BILL_PAYMENT_MODEL)
+      }
+
+      if (model != null) {
+        BillPaymentScreen(model = model, navController)
+      }
+    }
+    composable(ScreenRoutes.PAYMENT_SUCCESSFULLY) {
+      // This remember ensures that the model is stored once when the screen first opens,
+      // and not recomputed on recomposition or when the back stack changes.
+      val model = remember {
+        navController
+          .previousBackStackEntry
+          ?.savedStateHandle
+          ?.get<BillPaymentModel>(ScreenRoutes.Keys.PAYMENT_SUCCESSFULLY_MODEL)
+      }
+
+      if (model != null) {
+        PaymentSuccessfullyScreen(model = model, navController)
+      }
+    }
+    composable(ScreenRoutes.PROFILE) { ProfileScreen(navController) }
 
   }
 }

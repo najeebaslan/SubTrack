@@ -21,7 +21,7 @@ import com.najeeb.movies.screens.navigation.Screen
 @Composable
 fun IsHaveAccount(
   isSignIn: Boolean,
-  onNavigate: (String) -> Unit,
+  onClick: () -> Unit
 ) {
   val alreadyHaveAccount = stringResource(id = R.string.already_have_account)
   val noHaveAccount = stringResource(id = R.string.no_have_account)
@@ -60,10 +60,7 @@ fun IsHaveAccount(
           pop()
         }
         if (annotations.getStringAnnotations(tag, offset, offset).isNotEmpty()) {
-          onNavigate(
-            if (isSignIn) Screen.Home.route
-            else Screen.Profile.route
-          )
+          onClick()
         }
       }
     )

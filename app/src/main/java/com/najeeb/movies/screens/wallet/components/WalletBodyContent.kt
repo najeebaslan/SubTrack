@@ -32,10 +32,12 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.najeeb.movies.R
 import com.najeeb.movies.components.ToggleButton
 import com.najeeb.movies.data.TransactionDetailsExpenseModels
 import com.najeeb.movies.data.TransactionDetailsIncomeModels
 import com.najeeb.movies.data.TransactionDetailsModels
+import com.najeeb.movies.data.UpcomingBillsItem
 import com.najeeb.movies.data.UpcomingBillsData
 import com.najeeb.movies.data.transactionList
 import com.najeeb.movies.screens.home.HomeListItems
@@ -52,7 +54,7 @@ fun WalletBodyContent(
   minImageSize: Dp = 100.dp,
   onClickPay: () -> Unit,
   onClickTransactions: (TransactionDetailsModels) -> Unit,
-
+  onClickBillDetails: (UpcomingBillsItem) -> Unit
   ) {
   var currentImageSize by remember { mutableStateOf(maxImageSize) }
   var imageScale by remember { mutableFloatStateOf(1f) }
@@ -87,7 +89,7 @@ fun WalletBodyContent(
     HorizontalPager(state = pagerState) { page ->
       when (page) {
         0 -> TransactionsListItems(currentImageSize, onClickTransactions)
-        1 -> UpcomingBillsLazyColumn(currentImageSize, onClickPay)
+        1 -> UpcomingBillsLazyColumn(currentImageSize, onClickPay, onClickBillDetails)
       }
     }
 
@@ -174,7 +176,11 @@ fun TransactionsListItems(
 }
 
 @Composable
-fun UpcomingBillsLazyColumn(currentImageSize: Dp, onClickPay: () -> Unit) {
+fun UpcomingBillsLazyColumn(
+  currentImageSize: Dp, 
+  onClickPay: () -> Unit,
+  onClickBillDetails: (UpcomingBillsItem) -> Unit
+) {
   LazyColumn(
     Modifier
       .fillMaxSize()
@@ -186,10 +192,10 @@ fun UpcomingBillsLazyColumn(currentImageSize: Dp, onClickPay: () -> Unit) {
       UpcomingBillsListItems(
         modifier = Modifier.padding(vertical = 8.dp),
         imageUri = upcomingBills.imageUri,
-        paddingImage = 12.dp,
         name = upcomingBills.name,
         date = upcomingBills.date,
-        onClickPay = onClickPay
+        onClickPay = onClickPay,
+        onClickBillDetails = { onClickBillDetails(upcomingBills) }
       )
     }
     item {
