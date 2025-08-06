@@ -2,7 +2,6 @@
 
 package com.najeeb.movies
 
-import android.content.Intent
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
@@ -14,14 +13,11 @@ import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -39,7 +35,6 @@ import com.najeeb.movies.screens.home.HomeScreen
 import com.najeeb.movies.screens.navigation.MovieNavigationBar
 import com.najeeb.movies.screens.profile.ProfileScreen
 import com.najeeb.movies.screens.statistic.StatisticScreen
-import com.najeeb.movies.screens.statistic.StatisticsViewModel
 import com.najeeb.movies.screens.transaction_details.TransactionDetailsScreen
 import com.najeeb.movies.screens.wallet.WalletScreen
 
