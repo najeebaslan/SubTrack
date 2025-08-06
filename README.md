@@ -1,5 +1,5 @@
-# Movies App
-
+# SubTrack App
+  <td><img src="ScreenShots/Thumbnail.webp" alt="Image 2"></td>
 A modern Android app for managing subscriptions, bills, and payments with a beautiful UI and optimized navigation.
 
 ---
