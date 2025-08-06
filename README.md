@@ -34,7 +34,7 @@ A modern Android app for managing subscriptions, bills, and payments with a beau
 app/
   src/
     main/
-      java/com/najeeb/movies/
+      java/com/najeeb/subTrack/
         navigation/
           ScreenRoutes.kt         # Centralized route constants
           NavigationHelper.kt     # Helper methods for navigation
