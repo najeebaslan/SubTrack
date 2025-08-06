@@ -7,6 +7,11 @@ https://github.com/user-attachments/assets/06fae8b9-b7dc-46ca-9687-5030addecee6
   <td><img src="ScreenShots/Thumbnail1.webp" alt="Image 2"></td>
 
 A modern Android app for managing subscriptions, bills, and payments with a beautiful UI and optimized navigation.
+## Built With  
+<p align="left">  
+  <img src="https://img.shields.io/badge/Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin"/>  
+  <img src="https://img.shields.io/badge/Jetpack%20Compose-4285F4?style=for-the-badge&logo=android&logoColor=white" alt="Jetpack Compose"/>  
+</p>  
 
 ---
 [Download Apk](https://github.com/najeebaslan/SubTrack/releases/download/v1.0.0/app-release.apk)
